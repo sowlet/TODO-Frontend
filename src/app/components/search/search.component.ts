@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ClassComponent } from '../class/class.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ClassComponent],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
@@ -29,4 +30,9 @@ export class SearchComponent {
       );
     }
   }
+
+// removeFromSearchResults(class: ClassComponent): void {
+
+// addToSearchResults(class: ClassComponent): void {
+
 }
