@@ -1,3 +1,19 @@
-<app-hotbar></app-hotbar>
-<app-search></app-search>
-<app-class></app-class>
+<div class="schedule-editor-container">
+    <!-- Hotbar at the top -->
+    <div class="hotbar-container">
+      <app-hotbar></app-hotbar>
+    </div>
+  
+    <!-- Main content area -->
+    <div class="main-content">
+      <!-- Search component on the left -->
+      <div class="search-container">
+        <app-search></app-search>
+      </div>
+  
+      <!-- Weekly schedule view on the right -->
+      <div class="schedule-container">
+        <app-weekly-schedule-view [schedule]="schedule"></app-weekly-schedule-view>
+      </div>
+    </div>
+  </div>
