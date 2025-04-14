@@ -1,0 +1,42 @@
+.about-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #001f3f; /* Dark blue background */
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.auth-buttons button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.auth-buttons button:hover {
+  text-decoration: underline;
+}
+
+.about-content {
+  padding: 20px;
+}
+
+.about-content h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.about-content p {
+  font-size: 14px;
+  color: #333;
+  margin: 10px 0;
+}

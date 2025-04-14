@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-about',
-  imports: [],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.css'
+  styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
+  constructor(private router: Router) {}
 
+  navigateToSignUp() {
+    this.router.navigate(['/sign-in']);
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
 }
