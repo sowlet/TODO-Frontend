@@ -3,10 +3,16 @@ import { ScheduleEditorComponent } from './schedule-editor/schedule-editor.compo
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AboutComponent } from './about/about.component';
+import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 export const routes: Routes = [
     {path: 'schedule-editor', component: ScheduleEditorComponent},
+    {path: 'about', component: AboutComponent},
     {path: 'home', component: HomeComponent},
-    {path: '', redirectTo: '/home', pathMatch: 'full'},
+    {path: 'login', component: LoginComponent},
+    {path: 'sign-in', component: SignInComponent},
+    {path: '', redirectTo: '/about', pathMatch: 'full'},
 ];

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ScheduleEditorComponent } from './schedule-editor/schedule-editor.component';
 import { HomeComponent } from './home/home.component';
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, ScheduleEditorComponent, CommonModule, HttpClientModule, FormsModule, HomeComponent],
