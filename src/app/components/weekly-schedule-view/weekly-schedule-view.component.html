@@ -1,11 +1,17 @@
 <div class="weekly-schedule-view">
-    <div class="day-column" *ngFor="let day of days">
-      <h3 class="day-label">{{ day }}</h3>
-      <div class="class-card" *ngFor="let classItem of schedule[day]">
-        <h4>{{ classItem.className }}</h4>
-        <p>{{ classItem.courseCode }}</p>
-        <p>{{ classItem.profName }}</p>
-        <p>{{ classItem.classTime }}</p>
-      </div>
+  <div class="day-column" *ngFor="let day of days">
+    <h3 class="day-label">{{ day }}</h3>
+    <div class="class-card" *ngFor="let classItem of schedule[day]">
+      <h4>{{ classItem.className }}</h4>
+      <p>{{ classItem.courseCode }}</p>
+      <p>{{ classItem.profName }}</p>
+      <p>{{ classItem.classTime }}</p>
     </div>
   </div>
+</div>
+
+<!-- Buttons container -->
+<div class="schedule-buttons">
+  <button class="save-button" (click)="saveSchedule()">Save Changes</button>
+  <button class="delete-button" (click)="deleteSchedule()">Delete Schedule</button>
+</div>

@@ -32,3 +32,41 @@
     padding: 10px;
     margin-bottom: 10px;
   }
+
+  /* Buttons container */
+.schedule-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+/* Delete button */
+.delete-button {
+  background-color: #001f3f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #ff4136;
+}
+
+/* Save button */
+.save-button {
+  background-color: #001f3f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: #2ecc40;
+}
