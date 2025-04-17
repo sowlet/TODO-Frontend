@@ -20,7 +20,7 @@ export class SearchComponent {
   onSearch(): void {
     if (this.searchQuery.trim()) {
       // `/api/search?query=${this.searchQuery}` replace this with actual API endpoint
-      this.http.get<any[]>(`http://localhost:7070/shopping-list`).subscribe(
+      this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}`).subscribe(
         (results) => {
           this.searchResults = results;
         },
