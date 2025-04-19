@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class WeeklyScheduleViewComponent {
   @Input() schedule: { [key: string]: any[] } = {};
+  @Input() showButtons: boolean = true;
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
   saveSchedule() {

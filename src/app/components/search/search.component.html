@@ -14,14 +14,8 @@
         <!-- Placeholder for individual result components -->
         <!-- {{ result.name }}-->
       <!-- </div> --> 
-      <div *ngFor="let item of searchResults" class="result-card">
-        <div class="result-header">
-          <h3 class="result-title">{{ item }}</h3>
-          <span class="result-code">{{ item.code }}</span>
-          <button class="add-button">+</button>
-        </div>
-        <p class="result-description">{{ item.description }}</p>
-        <button class="play-button">▶</button>
+      <div *ngFor="let classItem of searchResults">
+        <app-class [className]="classItem.className"></app-class>
       </div>
   </div>
 </div>

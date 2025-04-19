@@ -10,7 +10,7 @@ import { SearchComponent } from '../search/search.component';
   styleUrl: './class.component.css'
 })
 export class ClassComponent {
-  className: string = '';
+  @Input() className: string = '';
   courseCode: string = '';
   courseDescription: string = '';
   isInSchedule: boolean = false;
