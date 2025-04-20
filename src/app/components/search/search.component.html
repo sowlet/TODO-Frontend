@@ -5,17 +5,14 @@
         [(ngModel)]="searchQuery"
         placeholder="Enter search query"
         class="search-input"
+        (keydown.enter)="onSearch()"
       />
       <button (click)="onSearch()" class="search-button">Search</button>
     </div>
     
     <div class="results-container">
-      <!-- <div *ngFor="let result of searchResults" class="result-item"> -->
-        <!-- Placeholder for individual result components -->
-        <!-- {{ result.name }}-->
-      <!-- </div> --> 
       <div *ngFor="let classItem of searchResults">
-        <app-class [className]="classItem.className"></app-class>
+        <app-class [className]="classItem.className" [isInSchedule]="false" (addClass)="handleAddClass($event)"></app-class>
       </div>
   </div>
-</div>
+</div>  

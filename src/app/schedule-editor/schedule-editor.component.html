@@ -8,7 +8,7 @@
     <div class="main-content">
       <!-- Search component on the left -->
       <div class="search-container">
-        <app-search></app-search>
+        <app-search (addClassToSchedule)="handleAddClass({ day: $event.day, classItem: $event.classComponent })"></app-search>
       </div>
   
       <!-- Weekly schedule view on the right -->
