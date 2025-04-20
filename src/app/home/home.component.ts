@@ -31,6 +31,10 @@ export class HomeComponent {
 
 
   getCandidateSchedules() {
+
+    // add logic to fetch candidate schedules from the backend
+
+    // for now, return a mock list of candidate schedules
     return [
       {
         id: 1,

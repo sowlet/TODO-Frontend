@@ -5,6 +5,7 @@
       <app-class
         [className]="classItem.className"
         [isInSchedule]="true"
+        (removeClass)="removeClassFromSchedule(day, $event)"
       ></app-class>
     </div>
   </div>

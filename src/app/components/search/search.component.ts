@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { ClassModel } from '../../models/class.model';
 })
 export class SearchComponent {
   searchQuery: string = '';
-  searchResults: ClassModel[] = [];
+  @Input() searchResults: ClassModel[] = [];
 
   @Output() addClassToSchedule = new EventEmitter<{day: string, classComponent: any}>();
 
@@ -51,9 +51,5 @@ handleAddClass(classItem: any): void {
   this.searchResults = this.searchResults.filter(item => item.className !== classItem.className);
 }
 
-
-// removeFromSearchResults(class: ClassComponent): void {
-
-// addToSearchResults(class: ClassComponent): void {
 
 }
