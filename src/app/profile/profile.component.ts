@@ -26,9 +26,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  navigateToProfileCT() {
-    this.router.navigate(['/profile-ct']);
-  }
 
   navigateToAbout() {
     this.router.navigate(['/about']);

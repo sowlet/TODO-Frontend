@@ -7,7 +7,6 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileCtComponent } from './profile-ct/profile-ct.component';
 
 
 export const routes: Routes = [
@@ -17,6 +16,5 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'sign-in', component: SignInComponent},
     {path: 'profile', component: ProfileComponent},
-    {path: 'profile-ct', component: ProfileCtComponent},
     {path: '', redirectTo: '/about', pathMatch: 'full'},
 ];
