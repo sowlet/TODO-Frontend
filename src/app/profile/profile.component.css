@@ -13,3 +13,20 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.profile-content {
+    display: flex;
+    height: 100%; /* Take up remaining height */
+}
+
+.profile-section-one {
+    width: 33.33%;
+    border: 1px solid #ccc; /* Add borders for visibility */
+    padding: 10px;
+}
+
+.profile-section-two-three {
+    width: 66.66%;
+    border: 1px solid #ccc; /* Add borders for visibility */
+    padding: 10px;
+}
