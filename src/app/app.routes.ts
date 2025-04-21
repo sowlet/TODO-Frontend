@@ -9,7 +9,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 
 
 export const routes: Routes = [
-    {path: 'schedule-editor', component: ScheduleEditorComponent},
+    {path: 'schedule-editor/:id', component: ScheduleEditorComponent},
     {path: 'about', component: AboutComponent},
     {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},

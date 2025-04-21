@@ -1,25 +1,41 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ClassComponent } from '../class/class.component';
+import { ClassModel } from '../../models/class.model'; // Assuming you have a ClassModel defined in models folder
 
 @Component({
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ClassComponent],
   selector: 'app-weekly-schedule-view',
   templateUrl: './weekly-schedule-view.component.html',
   styleUrls: ['./weekly-schedule-view.component.css']
 })
 export class WeeklyScheduleViewComponent {
   @Input() schedule: { [key: string]: any[] } = {};
+  @Input() showButtons: boolean = true;
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-  saveSchedule() {
-    console.log('Schedule saved:', this.schedule);
-    // Add logic to save the schedule
+  // method to remove a class from the schedule
+  removeClassFromSchedule(day: string, classItem: ClassModel): void {
+    if (this.schedule[day]) {
+      this.schedule[day] = this.schedule[day].filter(cls => cls.className !== classItem.className);
+    }
+    console.log(`Class ${classItem.className} removed from ${day}`);
+    console.log('Current schedule:', this.schedule);
   }
 
+  // method to save the current schedule to the backend
+  saveSchedule() {
+    console.log('Schedule saved:', this.schedule);
+    // Add logic to save the schedule to the backend here
+  }
+
+  // method to delete the current schedule/wipe all of the classes
   deleteSchedule() {
-    console.log('Schedule deleted');
-    // Add logic to delete the schedule
-    this.schedule = { Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [] };
+    // remove all classes from each day of the schedule
+    this.days.forEach(day => {
+      this.schedule[day] = [];
+    });
+    console.log('Schedule cleared');
   }
 }

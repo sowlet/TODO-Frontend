@@ -1,0 +1,71 @@
+.home-container {
+  display: flex;
+  flex-direction: column; /* Stack hotbar at the top */
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.hotbar {
+  width: 100%;
+  background-color: #001f3f; /* Dark blue background */
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for separation */
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1; /* Take up remaining space below the hotbar */
+}
+
+.left-panel {
+  width: 33.33%; /* 1/3 of the screen */
+  background-color: #f4f4f4; /* Light gray background */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+  width: 66.67%; /* 2/3 of the screen */
+  padding: 20px;
+}
+
+.main-content h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.schedule-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.schedule-item {
+  width: 30%;
+  background-color: #001f3f; /* Dark blue background */
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.schedule-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.schedule-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.schedule-semester {
+  font-size: 14px;
+  color: #ccc;
+}
