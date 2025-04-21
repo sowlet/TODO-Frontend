@@ -25,5 +25,6 @@ export class HotbarFComponent implements OnInit {
   profileClick() {
     // Add your profile click logic here
     console.log('Profile button clicked');
+    this.router.navigate(['/schedule-editor']);
   }
 }
