@@ -1,1 +1,16 @@
-<p>profile-ct works!</p>
+<div class="profile-container">
+    <app-hotbar-f></app-hotbar-f>
+    <div class="profile-banner">
+        {{username}}'s PROFILE
+    </div>
+    <div class="profile-content">
+        <div class="profile-section-one">
+            <button (click)="navigateToProfile()">Account Details</button>
+            <button (click)="navigateToProfileCT()">Classes Taken</button>
+            <button (click)="navigateToAbout()">Logout</button>
+        </div>
+        <div class="profile-section-two-three">
+            <!-- Content for the second and third third -->
+        </div>
+    </div>
+</div>
