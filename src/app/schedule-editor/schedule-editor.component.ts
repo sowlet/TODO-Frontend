@@ -3,6 +3,7 @@ import { SearchComponent } from '../components/search/search.component';
 import { HotbarComponent } from '../components/hotbar/hotbar.component';
 import { ClassComponent } from '../components/class/class.component';
 import { WeeklyScheduleViewComponent } from '../components/weekly-schedule-view/weekly-schedule-view.component';
+import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
 
 @Component({
   selector: 'app-schedule-editor',
@@ -11,8 +12,9 @@ import { WeeklyScheduleViewComponent } from '../components/weekly-schedule-view/
     SearchComponent,
     HotbarComponent,
     ClassComponent,
-    WeeklyScheduleViewComponent
-  ], // Import SearchComponent here
+    WeeklyScheduleViewComponent,
+    HotbarFComponent
+], // Import SearchComponent here
   templateUrl: './schedule-editor.component.html',
   styleUrls: ['./schedule-editor.component.css']
 })
