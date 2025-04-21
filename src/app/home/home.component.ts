@@ -16,10 +16,12 @@ export class HomeComponent {
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.username = this.authService.getUsername();
-    this.password = this.authService.getPassword();
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
-  }
+  // example of accessing username and password from AuthService
+  // This is just for demonstration purposes. In a real application, you would not log sensitive information like passwords.
+  // ngOnInit(): void {
+  //   this.username = this.authService.getUsername();
+  //   this.password = this.authService.getPassword();
+  //   console.log('Username:', this.username);
+  //   console.log('Password:', this.password);
+  // }
 }
