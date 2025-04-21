@@ -44,4 +44,11 @@
     width: 66.66%;
     border: 1px solid #ccc; /* Add borders for visibility */
     padding: 10px;
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Stack content vertically */
+}
+
+app-search {
+    width: 50%; /* Take half the width of the container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
