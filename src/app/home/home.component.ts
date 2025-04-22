@@ -18,6 +18,7 @@ import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
 export class HomeComponent {
 
   candidateSchedules: any[] = this.getCandidateSchedules();
+  newSchedule = { name: '', semester: '', schedule: [] };
 
   constructor(private router: Router) {{
 
@@ -66,6 +67,17 @@ export class HomeComponent {
 
   createCandidateSchedule() {
     // add logic to create a new candidate schedule via POST request.
+    const newId = this.candidateSchedules.length + 1; // Generate a new ID
+    const newSchedule = {
+      id: newId,
+      name: this.newSchedule.name,
+      semester: this.newSchedule.semester,
+      schedule: [], // Empty schedule for now
+    };
+
+    this.candidateSchedules.push(newSchedule); // Add the new schedule to the list
+    this.newSchedule = { name: '', semester: '', schedule: [] }; // Reset the form
+    console.log('Created new schedule:', newSchedule);
   }
 
   deleteCandidateSchedule(scheduleId: number) {
