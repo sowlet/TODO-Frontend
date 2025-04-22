@@ -1,23 +1,23 @@
 <div class="home-container">
-    <div class="hotbar">
-      <app-hotbar-f></app-hotbar-f>
+  <div class="hotbar">
+    <app-hotbar-f></app-hotbar-f>
+  </div>
+  <div class="content-container">
+    <div class="left-panel">
+      <app-recommended-links></app-recommended-links>
     </div>
-    <div class="content-container">
-      <div class="left-panel">
-        <app-recommended-links></app-recommended-links>
-      </div>
-      <div class="main-content">
-        <h1>Candidate Schedules</h1>
-        <div class="schedule-list">
-          <div
-            class="schedule-item"
-            *ngFor="let schedule of candidateSchedules"
-            (click)="navigateToSchedule(schedule.id)"
-          >
-            <p class="schedule-name">{{ schedule.name }}</p>
-            <p class="schedule-semester">Semester: {{ schedule.semester }}</p>
+    <div class="main-content">
+      <h1>Candidate Schedules</h1>
+      <div class="schedule-list">
+        <div class="schedule-item" *ngFor="let schedule of candidateSchedules">
+          <p class="schedule-name">{{ schedule.name }}</p>
+          <p class="schedule-semester">Semester: {{ schedule.semester }}</p>
+          <div class="button-container">
+            <button (click)="navigateToSchedule(schedule.id)" class="view-button">View Schedule</button>
+            <button (click)="deleteCandidateSchedule(schedule.id)" class="delete-button">Delete</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

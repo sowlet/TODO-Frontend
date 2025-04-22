@@ -63,4 +63,13 @@ export class HomeComponent {
       }
     ];
   }
+
+  createCandidateSchedule() {
+    // add logic to create a new candidate schedule via POST request.
+  }
+
+  deleteCandidateSchedule(scheduleId: number) {
+    // add logic to delete a candidate schedule via DELETE request.
+    console.log("Deleting schedule with ID:", scheduleId);
+  }
 }
