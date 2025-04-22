@@ -7,10 +7,11 @@ import { WeeklyScheduleViewComponent } from '../components/weekly-schedule-view/
 import { RecommendedLinksComponent } from '../components/recommended-links/recommended-links.component';
 import { HotbarComponent } from '../components/hotbar/hotbar.component';
 import { get } from 'http';
+import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
 
 @Component({
   selector: 'app-home',
-  imports: [HotbarComponent, CommonModule, FormsModule, HttpClientModule, RecommendedLinksComponent, WeeklyScheduleViewComponent],
+  imports: [HotbarComponent, CommonModule, FormsModule, HttpClientModule, RecommendedLinksComponent, WeeklyScheduleViewComponent, HotbarFComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

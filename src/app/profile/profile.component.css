@@ -1,0 +1,78 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+.profile-banner {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.profile-content {
+    display: flex;
+    height: 100%; /* Take up remaining height */
+}
+
+.profile-section-one {
+    width: 33.33%;
+    border: 1px solid #ccc; /* Add borders for visibility */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section-one button {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-section-one button:hover {
+    background-color: #e0e0e0;
+}
+
+.profile-section-two-three {
+    width: 66.66%;
+    border: 1px solid #ccc; /* Add borders for visibility */
+    padding: 10px;
+}
+
+.profile-details-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-details-form label {
+    font-weight: bold;
+}
+
+.profile-details-form input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-details-form button {
+    padding: 5px 10px; /* Smaller padding */
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-end; /* Right alignment */
+    font-size: 14px; /* Smaller font size */
+}
+
+.profile-details-form button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
