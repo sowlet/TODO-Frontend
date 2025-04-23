@@ -1,12 +1,26 @@
 <div class="weekly-schedule-view">
   <div class="day-column" *ngFor="let day of days">
     <h3 class="day-label">{{ day }}</h3>
-    <div class="class-card" *ngFor="let classItem of schedule[day]">
+    <div class="class-card" *ngFor="let item of schedule[day]">
+      <!-- Check if the item is a class or a custom event -->
       <app-class
-        [className]="classItem.className"
+        *ngIf="item.className"
+        [className]="item.className"
         [isInSchedule]="true"
         (removeClass)="removeClassFromSchedule(day, $event)"
       ></app-class>
+
+      <app-custom-event
+        *ngIf="item.name && !item.className"
+        [name]="item.name"
+        [location]="item.location"
+        [day]="item.day"
+        [startTime]="item.startTime"
+        [endTime]="item.endTime"
+        [id]="item.id"
+        [isInSchedule]="true"
+        (removeEvent)="removeEventFromSchedule(day, $event)"
+      ></app-custom-event>
     </div>
   </div>
 </div>
