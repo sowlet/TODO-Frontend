@@ -69,3 +69,139 @@
   font-size: 14px;
   color: #ccc;
 }
+
+.delete-button {
+  background-color: #ff4d4d; /* Red background for delete action */
+  color: white; /* White text for contrast */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 8px 12px; /* Add padding for better click area */
+  font-size: 14px; /* Adjust font size */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.delete-button:hover {
+  background-color: #e60000; /* Darker red on hover */
+}
+
+.delete-button:active {
+  background-color: #cc0000; /* Even darker red when clicked */
+  transform: scale(0.98); /* Slightly shrink button on click */
+}
+
+.schedule-item {
+  position: relative; /* Ensure buttons are positioned relative to the item */
+  padding: 20px;
+  background-color: #001f3f; /* Dark blue background */
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Align buttons to the left and right */
+  margin-top: 20px; /* Add spacing above the buttons */
+}
+
+.view-button {
+  background-color: #007bff; /* Blue background for view action */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.view-button:active {
+  background-color: #004085; /* Even darker blue when clicked */
+  transform: scale(0.98); /* Slightly shrink button on click */
+}
+
+.delete-button {
+  background-color: #ff4d4d; /* Red background for delete action */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #e60000; /* Darker red on hover */
+}
+
+.delete-button:active {
+  background-color: #cc0000; /* Even darker red when clicked */
+  transform: scale(0.98); /* Slightly shrink button on click */
+}
+
+.header-container {
+  display: flex;
+  justify-content: center; /* Center the header and form horizontally */
+  align-items: center; /* Vertically align items */
+  margin-bottom: 20px; /* Add spacing below the container */
+  gap: 20px; /* Add spacing between the header and the form */
+}
+
+.header-container h1 {
+  font-size: 36px; /* Increase font size for the header */
+  font-weight: bold; /* Make the header bold */
+  text-align: center; /* Center the text */
+  margin: 0; /* Remove default margin for better alignment */
+  flex: 1; /* Allow the header to take up available space */
+}
+
+.create-schedule-form {
+  width: 40%; /* Adjust the width of the form */
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-schedule-form h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #001f3f;
+}
+
+.create-schedule-form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-button {
+  background-color: #28a745; /* Green background for create action */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.create-button:active {
+  background-color: #1e7e34; /* Even darker green when clicked */
+  transform: scale(0.98); /* Slightly shrink button on click */
+}
