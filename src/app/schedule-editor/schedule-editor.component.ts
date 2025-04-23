@@ -5,6 +5,8 @@ import { ClassComponent } from '../components/class/class.component';
 import { WeeklyScheduleViewComponent } from '../components/weekly-schedule-view/weekly-schedule-view.component';
 import { ClassModel } from '../models/class.model';
 import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule-editor',
@@ -13,7 +15,9 @@ import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
     SearchComponent,
     HotbarComponent,
     WeeklyScheduleViewComponent,
-    HotbarFComponent
+    HotbarFComponent,
+    CommonModule,
+    FormsModule
 ], // Import SearchComponent here
   templateUrl: './schedule-editor.component.html',
   styleUrls: ['./schedule-editor.component.css']
@@ -21,6 +25,15 @@ import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
 export class ScheduleEditorComponent {
   schedule: { [key: string]: any[] } = {};
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+   // Form data for creating a custom event
+   customEvent = {
+    name: '',
+    location: '',
+    day: 'Monday',
+    startTime: '',
+    endTime: '',
+  };
 
   // method to handle adding class from search results to the weekly schedule view component
   handleAddClass(event: { day: string; classItem: any }): void {
@@ -32,4 +45,23 @@ export class ScheduleEditorComponent {
     console.log('Current schedule:', this.schedule);
   }
 
+   // Method to handle adding a custom event
+   addCustomEvent(): void {
+    const event = { ...this.customEvent, isInSchedule: true };
+    if (!this.schedule[event.day]) {
+      this.schedule[event.day] = [];
+    }
+    this.schedule[event.day].push(event);
+    console.log(`Custom event ${event.name} added to ${event.day}`);
+    console.log('Current schedule:', this.schedule);
+
+    // Reset the form
+    this.customEvent = {
+      name: '',
+      location: '',
+      day: 'Monday',
+      startTime: '',
+      endTime: '',
+    };
+  }
 }

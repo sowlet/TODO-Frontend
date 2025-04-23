@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClassComponent } from '../class/class.component';
 import { ClassModel } from '../../models/class.model'; // Assuming you have a ClassModel defined in models folder
+import { CustomEventComponent } from '../custom-event/custom-event.component';
 
 @Component({
-  imports: [CommonModule, FormsModule, ClassComponent],
+  imports: [CommonModule, FormsModule, ClassComponent, CustomEventComponent],
   selector: 'app-weekly-schedule-view',
   templateUrl: './weekly-schedule-view.component.html',
   styleUrls: ['./weekly-schedule-view.component.css']
@@ -38,4 +39,13 @@ export class WeeklyScheduleViewComponent {
     });
     console.log('Schedule cleared');
   }
+
+// method to remove a custom event from the schedule
+removeEventFromSchedule(day: string, eventItem: any): void {
+  if (this.schedule[day]) {
+    this.schedule[day] = this.schedule[day].filter(event => event.id !== eventItem.id);
+  }
+  console.log(`Custom event ${eventItem.name} removed from ${day}`);
+  console.log('Current schedule:', this.schedule);
+}
 }
