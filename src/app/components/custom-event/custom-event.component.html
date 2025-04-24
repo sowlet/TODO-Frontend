@@ -2,17 +2,11 @@
 <div class="event-card">
     <div class="event-header">
       <h2>{{ name }}</h2>
-      <span class="add-icon" *ngIf="!isInSchedule" (click)="addToSchedule()">+</span>
-      <span class="remove-icon" *ngIf="isInSchedule" (click)="removeFromSchedule()">-</span>
     </div>
     <div>
       <p class="event-location">Location: {{ location }}</p>
       <p class="event-day">Day: {{ day }}</p>
       <p class="event-time">Time: {{ startTime }} - {{ endTime }}</p>
-    </div>
-    <div class="action-icon">
-      <span *ngIf="!isInSchedule">&#9654;</span>
-      <span *ngIf="isInSchedule">&#10003;</span>
     </div>
     <!-- Remove button -->
   <button class="remove-button" (click)="removeFromSchedule()">Remove</button>
