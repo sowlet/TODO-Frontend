@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,17 +12,30 @@ import { AuthService } from '../account.service'; // Import the AuthService
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
   showError: boolean = false;
+  showAuthMessage: boolean = false;
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['authRequired']) {
+        this.showAuthMessage = true;
+        setTimeout(() => {
+          this.showAuthMessage = false;
+        }, 6000); // Hide message after 3 seconds
+      }
+    });
+  }
 
   navigateToAbout() {
     this.router.navigate(['/about']);
