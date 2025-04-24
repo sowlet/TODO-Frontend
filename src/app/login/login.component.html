@@ -26,6 +26,12 @@
       />
     </div>
     <button type="submit" class="login-button">Login</button>
+    <div *ngIf="showError" class="error-popup">
+      <div class="error-content">
+        <p>{{errorMessage}}</p>
+        <button (click)="closeError()">Close</button>
+      </div>
+    </div>
   </form>
   <p class="signup-link">
     Not a User? <span (click)="navigateToSignUp()">SIGN UP</span>

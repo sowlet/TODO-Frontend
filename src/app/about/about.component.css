@@ -2,41 +2,87 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #001f3f; /* Dark blue background */
-  padding: 10px 20px;
-  color: white;
+  background: linear-gradient(to right, #001f3f, #003366);
+  padding: 1.25rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo span {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-transform: uppercase;
 }
 
 .auth-buttons button {
-  background: none;
-  border: none;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   color: white;
-  font-size: 16px;
-  margin-left: 20px;
+  font-size: 1rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .auth-buttons button:hover {
-  text-decoration: underline;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
 }
 
 .about-content {
-  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  line-height: 1.6;
 }
 
 .about-content h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 20px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.about-content h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background: #001f3f;
 }
 
 .about-content p {
-  font-size: 14px;
-  color: #333;
-  margin: 10px 0;
+  font-size: 1.1rem;
+  color: #444;
+  margin: 1.25rem 0;
+  max-width: 800px;
+}
+
+/* Add responsive design */
+@media (max-width: 768px) {
+  .about-header {
+      padding: 1rem;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .auth-buttons {
+      margin-top: 1rem;
+  }
+
+  .auth-buttons button {
+      margin: 0.5rem;
+  }
+
+  .about-content {
+      padding: 2rem 1rem;
+  }
 }

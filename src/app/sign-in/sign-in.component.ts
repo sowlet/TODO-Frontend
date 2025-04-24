@@ -16,7 +16,8 @@ export class SignInComponent {
   username = '';
   email = '';
   password = '';
-
+  errorMessage = '';
+  showError = false;
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) {}
 
   navigateToAbout() {
@@ -28,23 +29,28 @@ export class SignInComponent {
   }
 
   onSignUp() {
-    const signUpData = {
-      username: this.username,
-      email: this.email,
-      password: this.password
-    };
-
-    this.authService.setCredentials(this.username, this.password); // Store credentials
-    this.router.navigate(['/home']);
+    const url = `http://localhost:7070/sign-in?username=${this.username}&password=${this.password}&email=${this.email}`;
     
-    // this.http.post('/server/signup', signUpData).subscribe(
-    //   (response) => {
-    //     console.log('Sign up successful:', response);
-    //     this.router.navigate(['/home']);
-    //   },
-    //   (error) => {
-    //     console.error('Sign up failed:', error);
-    //   }
-    // );
+    this.http.post<boolean>(url, {}).subscribe({
+      next: (response) => {
+        if (response) {
+          this.authService.setCredentials(this.username, this.password);
+          this.router.navigate(['/home']);
+        } else {
+          this.errorMessage = 'Sign up failed: Username already exists';
+          this.showError = true;
+          console.error(this.errorMessage);
+        }
+      },
+      error: (error) => {
+        this.errorMessage = 'Sign up failed: ' + error.message;
+        this.showError = true;
+        console.error('Sign up failed:', error);
+      }
+    });
+  }
+
+  closeError() {
+    this.showError = false;
   }
 }
