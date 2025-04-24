@@ -1,26 +1,47 @@
 .hotbar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #001f3f;
-    padding: 10px 20px;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #001f3f, #003366);
+  padding: 1.25rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.profile-button button {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-button button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .hotbar-header {
+      padding: 1rem;
+      flex-direction: column;
+      text-align: center;
   }
-  
-  .logo {
-    cursor: pointer;
+
+  .profile-button {
+      margin-top: 1rem;
   }
-  
-  .profile-button button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .profile-button button:hover {
-    text-decoration: underline;
-  }
+}
