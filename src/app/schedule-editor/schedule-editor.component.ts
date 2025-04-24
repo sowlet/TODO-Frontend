@@ -57,9 +57,23 @@ export class ScheduleEditorComponent {
    // Method to handle adding a custom event
    addCustomEvent(): void {
     const event = { ...this.customEvent, isInSchedule: true };
+
+    if (!event.name.trim()) {
+      console.error('Event name cannot be empty.');
+      alert('Please provide a valid event name.');
+      return; // Prevent adding the event
+    }
+
+    if (this.checkTimeConflict(event.day, event.startTime, event.endTime)) {
+      console.error(`Time conflict detected for event "${event.name}" on ${event.day} from ${event.startTime} to ${event.endTime}.`);
+      alert(`Time conflict detected! Event "${event.name}" cannot be added.`);
+      return; // Prevent adding the event
+    }
+
     if (!this.schedule[event.day]) {
       this.schedule[event.day] = [];
     }
+
     this.schedule[event.day].push(event);
     console.log(`Custom event ${event.name} added to ${event.day}`);
     console.log('Current schedule:', this.schedule);
@@ -73,4 +87,35 @@ export class ScheduleEditorComponent {
       endTime: '',
     };
   }
+
+// Method to check if a time conflict exists
+checkTimeConflict(day: string, startTime: string, endTime: string): boolean {
+  //This code was completed by GitHub Copilot and modified
+
+  //Check if any events are scheduled for the day in question
+  if (!this.schedule[day]) {
+    return false; 
+  }
+
+  const start = this.convertTimeToMinutes(startTime);
+  const end = this.convertTimeToMinutes(endTime);
+
+  for (const item of this.schedule[day]) {
+    const itemStart = this.convertTimeToMinutes(item.startTime);
+    const itemEnd = this.convertTimeToMinutes(item.endTime);
+
+    // Check if the time ranges overlap
+    if ((start >= itemStart && start < itemEnd) || (end > itemStart && end <= itemEnd) || (start <= itemStart && end >= itemEnd)) {
+      return true; // Conflict detected
+    }
+  }
+
+  return false; // No conflict
+}
+
+// Helper method to convert time in "HH:MM" format to minutes
+private convertTimeToMinutes(time: string): number {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
+}
 }
