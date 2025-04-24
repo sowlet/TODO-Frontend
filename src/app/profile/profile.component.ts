@@ -3,6 +3,7 @@ import { HotbarFComponent } from '../components/hotbar-f/hotbar-f.component';
 import { AuthService } from '../account.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -15,11 +16,26 @@ export class ProfileComponent implements OnInit {
   major: string = '';
   minor: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.username = this.authService.getUsername();
-    // set major and minor fields from GET request to server
+    const url = `http://localhost:7070/profile?username=${this.username}`;
+    
+    this.http.get<string[]>(url).subscribe({
+      next: (response) => {
+        console.log('Profile info received:', response);
+        this.major = response[1];
+        this.minor = response[2];
+      },
+      error: (error) => {
+        console.error('Failed to get profile info:', error);
+      }
+    });
   }
 
   navigateToProfile() {
