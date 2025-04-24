@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { SearchComponent } from '../components/search/search.component';
 import { HotbarComponent } from '../components/hotbar/hotbar.component';
 import { ClassComponent } from '../components/class/class.component';
@@ -26,6 +26,9 @@ export class ScheduleEditorComponent {
   schedule: { [key: string]: any[] } = {};
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
+  @Input() classes: ClassModel[] = []
+  @Input() customEvents: any[] = []
+
    // Form data for creating a custom event
    customEvent = {
     name: '',
@@ -34,6 +37,11 @@ export class ScheduleEditorComponent {
     startTime: '',
     endTime: '',
   };
+
+  // method to handle loadding classes and custom events into the schedule
+  loadSchedule(): void {
+    // classModel.classDays will be a string like "MWF" or "TR"
+  }
 
   // method to handle adding class from search results to the weekly schedule view component
   handleAddClass(event: { day: string; classItem: any }): void {
