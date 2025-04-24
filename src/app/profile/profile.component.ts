@@ -48,10 +48,15 @@ export class ProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    // Implement save changes logic here, e.g., call a service to update the user's profile
-    console.log('Major:', this.major);
-    console.log('Minor:', this.minor);
-    // call update
-    // You would typically send this data to a backend service
+    const url = `http://localhost:7070/profile?username=${this.username}&major=${this.major}&minor=${this.minor}`;
+    
+    this.http.post<boolean>(url, {}).subscribe({
+      next: (response) => {
+        console.log('Update successful:', response);
+      },
+      error: (error) => {
+        console.error('Failed to update profile:', error);
+      }
+    });
   }
 }
