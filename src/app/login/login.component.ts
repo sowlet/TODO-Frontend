@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.showAuthMessage = true;
         setTimeout(() => {
           this.showAuthMessage = false;
-        }, 3000); // Hide message after 3 seconds
+        }, 6000); // Hide message after 3 seconds
       }
     });
   }
