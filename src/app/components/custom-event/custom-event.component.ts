@@ -14,7 +14,6 @@ export class CustomEventComponent {
   @Input() startTime: string = '';
   @Input() endTime: string = '';
   @Input() id: string = '';
-  @Input() isInSchedule: boolean = false;
 
   @Output() addEvent = new EventEmitter<any>();
   @Output() removeEvent = new EventEmitter<any>();
@@ -30,7 +29,6 @@ export class CustomEventComponent {
   }
 
   addToSchedule(): void {
-    this.isInSchedule = true;
     this.addEvent.emit({
       name: this.name,
       location: this.location,
@@ -43,7 +41,6 @@ export class CustomEventComponent {
   }
 
   removeFromSchedule(): void {
-    this.isInSchedule = false;
     this.removeEvent.emit({
       name: this.name,
       location: this.location,
