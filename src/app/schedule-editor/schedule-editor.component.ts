@@ -65,4 +65,10 @@ export class ScheduleEditorComponent {
       endTime: '',
     };
   }
+
+  // Method to check if a time conflict exists
+  checkTimeConflict(day: string, startTime: string, endTime: string): boolean {
+    //TODO: Time conflict logic
+    return false;
+  }
 }
