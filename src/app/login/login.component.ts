@@ -15,6 +15,8 @@ import { AuthService } from '../account.service'; // Import the AuthService
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  errorMessage: string = '';
+  showError: boolean = false;
 
   constructor(
     private router: Router,
@@ -31,21 +33,28 @@ export class LoginComponent {
   }
 
   onLogin() {
-    const loginData = { username: this.username, password: this.password };
-    // console.log('Login data:', loginData);
+    const url = `http://localhost:7070/sign-in?username=${this.username}&password=${this.password}`;
+    
+    this.http.get<string>(url).subscribe({
+      next: (response) => {
+        if (response === this.username) {
+          this.authService.setCredentials(this.username, this.password);
+          this.router.navigate(['/home']);
+        } else {
+          this.errorMessage = 'Login failed: Invalid credentials';
+          this.showError = true;
+          console.error(this.errorMessage);
+        }
+      },
+      error: (error) => {
+        this.errorMessage = 'Login failed: ' + error.message;
+        this.showError = true;
+        console.error('Login failed:', error);
+      }
+    });
+  }
 
-    this.authService.setCredentials(this.username, this.password); // Store credentials
-    this.router.navigate(['/home']);
-
-    // this.http.get('http://localhost:7000/shopping-list', { params: loginData }).subscribe(
-    //   (response) => {
-    //     console.log('Login successful:', response);
-    //     this.authService.setCredentials(this.username, this.password); // Store credentials
-    //     this.router.navigate(['/home']);
-    //   },
-    //   (error) => {
-    //     console.error('Login failed:', error);
-    //   }
-    // );
+  closeError() {
+    this.showError = false;
   }
 }
