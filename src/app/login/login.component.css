@@ -1,17 +1,37 @@
 .login-header {
   display: flex;
-  justify-content: space-between; /* Changed to space-between */
-  align-items: center; /* Vertically align items */
-  background-color: #001f3f;
-  padding: 10px 20px;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #001f3f, #003366);
+  padding: 1.25rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-header .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
-.login-header .logo { /* Added logo class */
-  margin-right: auto; /* Push to the left */
+.login-header button {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-header button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
 }
 
 .login-container {
@@ -76,4 +96,39 @@ input {
 
 .signup-link span:hover {
   text-decoration: underline;
+}
+
+.error-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.error-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.error-content button {
+  margin-top: 10px;
+  padding: 5px 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.error-content button:hover {
+  background-color: #c82333;
 }

@@ -35,6 +35,13 @@
           required
         />
       </div>
+      <!-- Add this right after your form -->
+      <div *ngIf="showError" class="error-popup">
+        <div class="error-content">
+          <p>{{errorMessage}}</p>
+          <button (click)="closeError()">Close</button>
+        </div>
+      </div>
       <button type="submit" class="signup-button">Sign Up</button>
     </form>
     <p class="login-link">
