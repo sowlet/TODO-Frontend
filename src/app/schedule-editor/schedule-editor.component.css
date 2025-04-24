@@ -25,7 +25,28 @@
     background-color: #f0f4ff; /* Matches the search component background */
     padding: 20px;
     overflow-y: auto;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* The following code was generaged by GitHub Copilot */
+  .search-container input {
+    width: 100%; 
+    max-width: 100%; 
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .search-results {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Weekly schedule view on the right */
