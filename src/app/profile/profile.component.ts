@@ -44,6 +44,7 @@ export class ProfileComponent implements OnInit {
 
 
   navigateToAbout() {
+    this.authService.setCredentials('', '');
     this.router.navigate(['/about']);
   }
 
