@@ -35,15 +35,16 @@ export class LoginComponent {
   onLogin() {
     const url = `http://localhost:7070/sign-in?username=${this.username}&password=${this.password}`;
     
-    this.http.get<string>(url).subscribe({
+    this.http.get<boolean>(url).subscribe({
       next: (response) => {
-        if (response === this.username) {
-          this.authService.setCredentials(this.username, this.password);
-          this.router.navigate(['/home']);
-        } else {
+        console.log(response)
+        if (!response) {
           this.errorMessage = 'Login failed: Invalid credentials';
           this.showError = true;
           console.error(this.errorMessage);
+        } else {
+          this.authService.setCredentials(this.username, this.password);
+          this.router.navigate(['/home']);
         }
       },
       error: (error) => {
