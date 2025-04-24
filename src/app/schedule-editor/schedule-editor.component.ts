@@ -116,6 +116,10 @@ checkTimeConflict(day: string, startTime: string, endTime: string): boolean {
 
 // Helper method to convert time in "HH:MM" format to minutes
 private convertTimeToMinutes(time: string): number {
+  if (!time || !time.includes(':')) {
+    console.error(`Invalid time format: "${time}"`);
+    return 0; // Return 0 or handle the error appropriately
+  }
   const [hours, minutes] = time.split(':').map(Number);
   return hours * 60 + minutes;
 }
