@@ -1,16 +1,27 @@
-import { inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './account.service';
+import { AuthService as AccountService } from './account.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private accountService = inject(AccountService);
+  private router = inject(Router);
+
+  canActivate(): boolean {
+    if (this.accountService.getUsername()) {
+      return true;
+    }
+
+    this.router.navigate(['/login'], {
+      queryParams: { authRequired: true }
+    });
+    return false;
+  }
+}
 
 export const authGuard = () => {
-  const authService = inject(AuthService);
-  const router = inject(Router);
-
-  if (authService.getUsername()) {
-    return true;
-  }
-
-  // Redirect to login if not authenticated
-  router.navigate(['/login']);
-  return false;
+  const auth = inject(AuthService);
+  return auth.canActivate();
 };
