@@ -43,11 +43,20 @@ export class ScheduleEditorComponent {
 
   constructor(private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { classes: any[] };
-
-    if (state?.classes) {
-      // Map the raw classes into ClassModel instances
-      this.classes = state.classes.map((classItem) => new ClassModel(classItem));
+    const state = navigation?.extras.state as { 
+      scheduleName: string,
+      classes: any[],
+      customEvents: any[] 
+    };
+  
+    if (state) {
+      this.scheduleName = state.scheduleName;
+      if (state.classes) {
+        this.classes = state.classes.map((classItem) => new ClassModel(classItem));
+      }
+      if (state.customEvents) {
+        this.customEvents = state.customEvents;
+      }
     }
   }
 
