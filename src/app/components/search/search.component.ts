@@ -51,7 +51,7 @@ export class SearchComponent {
             classComponent.section = result.section;
             classComponent.semester = result.semester;
             classComponent.classId = result.id;
-            classComponent.classTimes = result.classTimes;
+            classComponent.classTimes = `${result.startTime} - ${result.endTime}`;
             classComponent.days = result.days;
             classComponent.isInSchedule = false;// Assuming classes are not in schedule initially
             this.searchResults.push(classComponent);
@@ -65,12 +65,20 @@ export class SearchComponent {
     }
   }
 
-handleAddClass(classItem: any): void {
-  const day = 'Monday'; // Replace with logic to determine the day
-  this.addClassToSchedule.emit({ day, classComponent: classItem });
-  // remove class from search results when added to schedule
-  this.searchResults = this.searchResults.filter(item => item.className !== classItem.className);
-}
+  handleAddClass(classItem: any): void {
+    const daysMapping: { [key: string]: string[] } = {
+      MWF: ['Monday', 'Wednesday', 'Friday'],
+      TR: ['Tuesday', 'Thursday']
+    };
+  
+    const classDays = daysMapping[classItem.days] || []; // Get the days based on the `days` property
+    classDays.forEach(day => {
+      this.addClassToSchedule.emit({ day, classComponent: classItem });
+    });
+  
+    // Remove the class from search results when added to the schedule
+    this.searchResults = this.searchResults.filter(item => item.className !== classItem.className);
+  }
 
 
 }

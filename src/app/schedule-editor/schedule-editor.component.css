@@ -20,21 +20,26 @@
   }
   
   /* Search component on the left */
-  .search-container {
-    flex: 1;
-    background-color: #f0f4ff; /* Matches the search component background */
-    padding: 20px;
-    overflow-y: auto;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
-  }
-  
   /* Weekly schedule view on the right */
-  .schedule-container {
-    flex: 2;
-    background-color: #e6f0ff; /* Matches the schedule view background */
-    padding: 20px;
-    overflow-y: auto;
-  }
+/* Weekly schedule view on the right */
+/* Weekly schedule view on the right */
+.schedule-container {
+  flex: 4; /* Allocate more space to the schedule view */
+  background-color: #e6f0ff; /* Matches the schedule view background */
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-height: calc(100vh - 100px); /* Adjust height to fit within the viewport */
+}
+
+/* Search component on the left */
+.search-container {
+  flex: 1; /* Keep the search container smaller */
+  background-color: #f0f4ff; /* Matches the search component background */
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
 
   .custom-event-form {
     margin-top: 20px;
