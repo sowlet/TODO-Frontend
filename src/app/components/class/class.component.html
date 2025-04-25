@@ -2,16 +2,15 @@
     <div class="class-header">
       <h2>{{ className }}</h2>
       <span class="add-icon" *ngIf="!isInSchedule" (click)="addToSchedule()">+</span>
-      <span class="remove-icon" *ngIf="isInSchedule" (click)="removeFromSchedule()">-</span>
     </div>
     <div>
-        <p class="course-code">{{ courseCode }}</p>
-        <p class="class-description">
-            Class Description: {{ courseDescription }}
-        </p>
+      <p class="course-code">{{ subject }} {{ number }} {{ section }}</p>
+      <p class="class-semester">Semester: {{ semester }}</p>
+      <p class="class-times">Class Times: {{ classTimes }}</p>
+      <p class="class-days">Days: {{ days }}</p>
     </div>
     <div class="action-icon">
-        <span *ngIf="!isInSchedule">&#9654;</span>
-        <span *ngIf="isInSchedule">&#10003;</span>
+      <button *ngIf="isInSchedule" class="remove-button" (click)="removeFromSchedule()">Remove</button>
+      <span *ngIf="!isInSchedule">&#9654;</span>
     </div>
-  </div>
+</div>

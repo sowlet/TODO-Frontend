@@ -7,6 +7,8 @@ import { ClassModel } from '../models/class.model';
 import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedule-editor',
@@ -26,6 +28,7 @@ export class ScheduleEditorComponent {
   schedule: { [key: string]: any[] } = {};
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
+  @Input() scheduleName: string = '';
   @Input() classes: ClassModel[] = []
   @Input() customEvents: any[] = []
 
@@ -38,18 +41,52 @@ export class ScheduleEditorComponent {
     endTime: '',
   };
 
+  constructor(private route: ActivatedRoute, private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { classes: any[] };
+
+    if (state?.classes) {
+      // Map the raw classes into ClassModel instances
+      this.classes = state.classes.map((classItem) => new ClassModel(classItem));
+    }
+  }
+
   // method to handle loadding classes and custom events into the schedule
   loadSchedule(): void {
     // classModel.classDays will be a string like "MWF" or "TR"
   }
 
   // method to handle adding class from search results to the weekly schedule view component
-  handleAddClass(event: { day: string; classItem: any }): void {
-    if (!this.schedule[event.day]) {
-      this.schedule[event.day] = [];
+  handleAddClass(event: { day: string; classComponent: any; onConflict: () => void }): void {
+    const { day, classComponent, onConflict } = event;
+    
+    // Extract start and end times from classTimes string
+    const [startTime, endTime] = classComponent.classTimes.split(' - ');
+    
+    console.log('Checking conflict for:', {
+      day,
+      className: classComponent.className,
+      startTime,
+      endTime
+    });
+  
+    if (this.checkTimeConflict(day, startTime, endTime)) {
+      console.error(`Time conflict detected for class "${classComponent.className}" on ${day}.`);
+      onConflict(); // Call the conflict callback
+      return; // Prevent adding the class
     }
-    this.schedule[event.day].push(event.classItem);
-    console.log(`Class ${event.classItem.className} added to ${event.day}`);
+  
+    if (!this.schedule[day]) {
+      this.schedule[day] = [];
+    }
+  
+    this.schedule[day].push({
+      ...classComponent,
+      startTime,
+      endTime
+    });
+    
+    console.log(`Class ${classComponent.className} added to ${day}`);
     console.log('Current schedule:', this.schedule);
   }
 

@@ -17,11 +17,14 @@ export class WeeklyScheduleViewComponent {
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
   // method to remove a class from the schedule
-  removeClassFromSchedule(day: string, classItem: ClassModel): void {
-    if (this.schedule[day]) {
-      this.schedule[day] = this.schedule[day].filter(cls => cls.className !== classItem.className);
-    }
-    console.log(`Class ${classItem.className} removed from ${day}`);
+  removeClassFromSchedule(classId: number): void {
+    this.days.forEach(day => {
+      if (this.schedule[day]) {
+        // Remove all instances of the class with the given classId
+        this.schedule[day] = this.schedule[day].filter(cls => cls.classId !== classId);
+      }
+    });
+    console.log(`Class with ID ${classId} removed from the schedule`);
     console.log('Current schedule:', this.schedule);
   }
 

@@ -37,13 +37,13 @@
           <p class="schedule-semester">Semester: {{ schedule.semester }}</p>
           <div class="button-container">
             <button
-              (click)="navigateToSchedule(schedule.id)"
+              (click)="navigateToSchedule(schedule)"
               class="view-button"
             >
               View Schedule
             </button>
             <button
-              (click)="deleteCandidateSchedule(schedule.id)"
+              (click)="deleteCandidateSchedule(schedule.name)"
               class="delete-button"
             >
               Delete

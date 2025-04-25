@@ -33,7 +33,7 @@
           <button type="submit">Add Event</button>
         </form>
       </div>
-      <app-search (addClassToSchedule)="handleAddClass({ day: $event.day, classItem: $event.classComponent })"></app-search>
+      <app-search (addClassToSchedule)="handleAddClass($event)"></app-search>
     </div>
 
     <!-- Weekly schedule view on the right -->

@@ -29,6 +29,34 @@ export class SignInComponent {
   }
 
   onSignUp() {
+    // Validate empty fields
+    if (!this.username || !this.password || !this.email) {
+        this.errorMessage = 'Please fill in all fields';
+        this.showError = true;
+        return;
+    }
+
+    // Validate username length and characters
+    if (this.username.length < 3 || this.username.length > 20) {
+        this.errorMessage = 'Username must be between 3 and 20 characters';
+        this.showError = true;
+        return;
+    }
+
+    // Validate password length
+    if (this.password.length < 6) {
+        this.errorMessage = 'Password must be at least 6 characters long';
+        this.showError = true;
+        return;
+    }
+
+    // Validate email format
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(this.email)) {
+        this.errorMessage = 'Please enter a valid email address';
+        this.showError = true;
+        return;
+    }
     const url = `http://localhost:7070/sign-in?username=${this.username}&password=${this.password}&email=${this.email}`;
     
     this.http.post<boolean>(url, {}).subscribe({
