@@ -61,6 +61,7 @@
   <div class="results-container">
     <div *ngFor="let classItem of searchResults">
       <app-class
+        [schedule]="classItem.schedule"
         [className]="classItem.className"
         [number]="classItem.number"
         [subject]="classItem.subject"

@@ -5,6 +5,7 @@
       <!-- Check if the item is a class or a custom event -->
       <app-class
         *ngIf="item.className"
+        [schedule]="item.schedule"
         [className]="item.className"
         [number]="item.number"
         [subject]="item.subject"
@@ -14,7 +15,7 @@
         [classTimes]="item.classTimes"
         [days]="item.days"
         [isInSchedule]="true"
-        (removeClass)="removeClassFromSchedule(day, $event)"
+        (removeClass)="removeClassFromSchedule($event)"
       ></app-class>
 
       <app-custom-event
