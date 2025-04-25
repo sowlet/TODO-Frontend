@@ -11,7 +11,7 @@ import { authGuard } from './auth.service';
 
 export const routes: Routes = [
     {
-        path: 'schedule-editor/:id', 
+        path: 'schedule-editor/:scheduleName', 
         component: ScheduleEditorComponent,
         canActivate: [authGuard]
     },

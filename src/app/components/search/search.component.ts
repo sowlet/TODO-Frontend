@@ -14,7 +14,7 @@ import { ClassModel } from '../../models/class.model';
 })
 export class SearchComponent {
   searchQuery: string = '';
-  @Input() searchResults: ClassModel[] = [];
+  @Input() searchResults: ClassComponent[] = [];
 
   @Output() addClassToSchedule = new EventEmitter<{day: string, classComponent: any}>();
 
@@ -32,7 +32,15 @@ export class SearchComponent {
           console.log('Search results received:', results);
           for (const result of results) {
             const classComponent = new ClassComponent();
-            classComponent.className = result;
+            classComponent.className = result.name;
+            classComponent.number = result.number;
+            classComponent.subject = result.subject;
+            classComponent.section = result.section;
+            classComponent.semester = result.semester;
+            classComponent.classId = result.id;
+            classComponent.classTimes = result.classTimes;
+            classComponent.days = result.days;
+            classComponent.isInSchedule = false;// Assuming classes are not in schedule initially
             this.searchResults.push(classComponent);
           }
           console.log('Search results:', this.searchResults);

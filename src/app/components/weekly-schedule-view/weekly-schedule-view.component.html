@@ -6,6 +6,13 @@
       <app-class
         *ngIf="item.className"
         [className]="item.className"
+        [number]="item.number"
+        [subject]="item.subject"
+        [section]="item.section"
+        [semester]="item.semester"
+        [classId]="item.classId"
+        [classTimes]="item.classTimes"
+        [days]="item.days"
         [isInSchedule]="true"
         (removeClass)="removeClassFromSchedule(day, $event)"
       ></app-class>
