@@ -46,6 +46,27 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    // Validate fields before making the request
+    if (!this.username || !this.password) {
+      this.errorMessage = 'Please enter both username and password';
+      this.showError = true;
+      return;
+    }
+
+    // Validate username length and characters
+    if (this.username.length < 3 || this.username.length > 20) {
+      this.errorMessage = 'Username must be between 3 and 20 characters';
+      this.showError = true;
+      return;
+    }
+
+    // Validate password length and complexity
+    if (this.password.length < 6) {
+      this.errorMessage = 'Password must be at least 6 characters long';
+      this.showError = true;
+      return;
+    }
+
     const url = `http://localhost:7070/sign-in?username=${this.username}&password=${this.password}`;
     
     this.http.get<boolean>(url).subscribe({
