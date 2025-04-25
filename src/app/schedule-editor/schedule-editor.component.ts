@@ -57,12 +57,36 @@ export class ScheduleEditorComponent {
   }
 
   // method to handle adding class from search results to the weekly schedule view component
-  handleAddClass(event: { day: string; classItem: any }): void {
-    if (!this.schedule[event.day]) {
-      this.schedule[event.day] = [];
+  handleAddClass(event: { day: string; classComponent: any; onConflict: () => void }): void {
+    const { day, classComponent, onConflict } = event;
+    
+    // Extract start and end times from classTimes string
+    const [startTime, endTime] = classComponent.classTimes.split(' - ');
+    
+    console.log('Checking conflict for:', {
+      day,
+      className: classComponent.className,
+      startTime,
+      endTime
+    });
+  
+    if (this.checkTimeConflict(day, startTime, endTime)) {
+      console.error(`Time conflict detected for class "${classComponent.className}" on ${day}.`);
+      onConflict(); // Call the conflict callback
+      return; // Prevent adding the class
     }
-    this.schedule[event.day].push(event.classItem);
-    console.log(`Class ${event.classItem.className} added to ${event.day}`);
+  
+    if (!this.schedule[day]) {
+      this.schedule[day] = [];
+    }
+  
+    this.schedule[day].push({
+      ...classComponent,
+      startTime,
+      endTime
+    });
+    
+    console.log(`Class ${classComponent.className} added to ${day}`);
     console.log('Current schedule:', this.schedule);
   }
 

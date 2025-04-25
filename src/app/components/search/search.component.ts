@@ -22,7 +22,11 @@ export class SearchComponent {
   daysTR: boolean = false;
   @Input() searchResults: ClassComponent[] = [];
 
-  @Output() addClassToSchedule = new EventEmitter<{day: string, classComponent: any}>();
+  @Output() addClassToSchedule = new EventEmitter<{
+    day: string, 
+    classComponent: any, 
+    onConflict: () => void
+  }>();
 
   constructor(private http: HttpClient) {}
 
@@ -71,13 +75,25 @@ export class SearchComponent {
       TR: ['Tuesday', 'Thursday']
     };
   
-    const classDays = daysMapping[classItem.days] || []; // Get the days based on the `days` property
+    const classDays = daysMapping[classItem.days] || [];
+    let conflictFound = false;
+  
+    // Add class to each day in the schedule
     classDays.forEach(day => {
-      this.addClassToSchedule.emit({ day, classComponent: classItem });
+      this.addClassToSchedule.emit({ 
+        day, 
+        classComponent: classItem,
+        onConflict: () => {
+          conflictFound = true;
+          alert(`Cannot add class: Time conflict on ${day}`);
+        }
+      });
     });
   
-    // Remove the class from search results when added to the schedule
-    this.searchResults = this.searchResults.filter(item => item.className !== classItem.className);
+    // Only remove from search results if no conflicts were found
+    if (!conflictFound) {
+      this.searchResults = this.searchResults.filter(item => item.className !== classItem.className);
+    }
   }
 
 
