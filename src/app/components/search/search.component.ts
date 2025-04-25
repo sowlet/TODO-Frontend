@@ -14,18 +14,31 @@ import { ClassModel } from '../../models/class.model';
 })
 export class SearchComponent {
   searchQuery: string = '';
+  subject: string = '';
+  startTime: string = '';
+  endTime: string = '';
+  days: string = '';
+  daysMWF: boolean = false;
+  daysTR: boolean = false;
   @Input() searchResults: ClassComponent[] = [];
 
   @Output() addClassToSchedule = new EventEmitter<{day: string, classComponent: any}>();
 
   constructor(private http: HttpClient) {}
 
+  updateDaysFilter(): void {
+    const selectedDays = [];
+    if (this.daysMWF) selectedDays.push('MWF');
+    if (this.daysTR) selectedDays.push('TR');
+    this.days = selectedDays.join(','); // Combine selected days into a comma-separated string
+  }
+
   onSearch(): void {
     if (this.searchQuery.trim()) {
       // clear search results before fetching new classes
       this.searchResults = [];
+      // future url: `http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`
 
-      
       // `/api/search?query=${this.searchQuery}` replace this with actual API endpoint
       this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}`).subscribe(
         (results) => {
