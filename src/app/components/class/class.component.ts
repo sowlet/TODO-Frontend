@@ -12,8 +12,13 @@ import { ClassModel } from '../../models/class.model'; // Assuming you have a Cl
 })
 export class ClassComponent {
   @Input() className: string = '';
-  courseCode: string = '';
-  courseDescription: string = '';
+  @Input() number: number = 0;
+  @Input() subject: string = '';
+  @Input() section: string = '';
+  @Input() semester: string = '';
+  @Input() classId: number = -1;
+  @Input() classTimes: string = '';
+  @Input() days: string = '';
   @Input() isInSchedule: boolean = false;
 
 @Output() addClass = new EventEmitter<ClassModel>();
@@ -23,24 +28,40 @@ export class ClassComponent {
   // need a reference to the scheduleView component as well
   
   constructor() {
-    // Initialize default values if needed
-    this.className = 'Default Class Name';
-    this.courseCode = 'Default Course Code';
-    this.courseDescription = 'Default Course Description';
+
   }
 
-  setClassDetails(className: string, courseCode: string, courseDescription: string): void {
+  setClassDetails(
+    className: string,
+    number: number,
+    subject: string,
+    section: string,
+    semester: string,
+    classId: number,
+    classTimes: string,
+    days: string
+  ): void {
     this.className = className;
-    this.courseCode = courseCode;
-    this.courseDescription = courseDescription;
+    this.number = number;
+    this.subject = subject;
+    this.section = section;
+    this.semester = semester;
+    this.classId = classId;
+    this.classTimes = classTimes;
+    this.days = days;
   }
 
   addToSchedule(): void {
     this.isInSchedule = true;
     this.addClass.emit({
       className: this.className,
-      courseCode: this.courseCode,
-      courseDescription: this.courseDescription,
+      number: this.number,
+      subject: this.subject,
+      section: this.section,
+      semester: this.semester,
+      classId: this.classId,
+      classTimes: this.classTimes,
+      days: this.days,
       isInSchedule: true
     } as ClassModel);
   }
@@ -49,8 +70,13 @@ export class ClassComponent {
     this.isInSchedule = false;
     this.removeClass.emit({
       className: this.className,
-      courseCode: this.courseCode,
-      courseDescription: this.courseDescription,
+      number: this.number,
+      subject: this.subject,
+      section: this.section,
+      semester: this.semester,
+      classId: this.classId,
+      classTimes: this.classTimes,
+      days: this.days,
       isInSchedule: false
     } as ClassModel);
   }

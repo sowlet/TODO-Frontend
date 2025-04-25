@@ -7,6 +7,8 @@ import { ClassModel } from '../models/class.model';
 import { HotbarFComponent } from "../components/hotbar-f/hotbar-f.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedule-editor',
@@ -26,6 +28,7 @@ export class ScheduleEditorComponent {
   schedule: { [key: string]: any[] } = {};
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
+  @Input() scheduleName: string = '';
   @Input() classes: ClassModel[] = []
   @Input() customEvents: any[] = []
 
@@ -37,6 +40,16 @@ export class ScheduleEditorComponent {
     startTime: '',
     endTime: '',
   };
+
+  constructor(private route: ActivatedRoute, private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { classes: any[] };
+
+    if (state?.classes) {
+      // Map the raw classes into ClassModel instances
+      this.classes = state.classes.map((classItem) => new ClassModel(classItem));
+    }
+  }
 
   // method to handle loadding classes and custom events into the schedule
   loadSchedule(): void {

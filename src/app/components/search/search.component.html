@@ -12,7 +12,18 @@
     
     <div class="results-container">
       <div *ngFor="let classItem of searchResults">
-        <app-class [className]="classItem.className" [isInSchedule]="false" (addClass)="handleAddClass($event)"></app-class>
+        <app-class
+        [className]="classItem.className"
+        [number]="classItem.number"
+        [subject]="classItem.subject"
+        [section]="classItem.section"
+        [semester]="classItem.semester"
+        [classId]="classItem.classId"
+        [classTimes]="classItem.classTimes"
+        [days]="classItem.days"
+        [isInSchedule]="false"
+        (addClass)="handleAddClass($event)"
+      ></app-class>
       </div>
   </div>
 </div>  
