@@ -17,6 +17,8 @@ export class ClassComponent {
   @Input() section: string = '';
   @Input() semester: string = '';
   @Input() classId: number = -1;
+  @Input() startTime: string = '';
+  @Input() endTime: string = '';
   @Input() classTimes: string = '';
   @Input() days: string = '';
   @Input() isInSchedule: boolean = false;
@@ -38,7 +40,8 @@ export class ClassComponent {
     section: string,
     semester: string,
     classId: number,
-    classTimes: string,
+    startTime: string,
+    endTime: string,
     days: string
   ): void {
     this.className = className;
@@ -47,7 +50,8 @@ export class ClassComponent {
     this.section = section;
     this.semester = semester;
     this.classId = classId;
-    this.classTimes = classTimes;
+    this.startTime = startTime;
+    this.endTime = endTime;
     this.days = days;
   }
 
@@ -60,7 +64,7 @@ export class ClassComponent {
       section: this.section,
       semester: this.semester,
       classId: this.classId,
-      classTimes: this.classTimes,
+      classTimes: `${this.startTime} - ${this.endTime}`,
       days: this.days,
       isInSchedule: true
     } as ClassModel);
@@ -75,7 +79,7 @@ export class ClassComponent {
       section: this.section,
       semester: this.semester,
       classId: this.classId,
-      classTimes: this.classTimes,
+      classTimes: `${this.startTime} - ${this.endTime}`,
       days: this.days,
       isInSchedule: false
     } as ClassModel);

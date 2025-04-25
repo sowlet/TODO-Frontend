@@ -14,18 +14,31 @@ import { ClassModel } from '../../models/class.model';
 })
 export class SearchComponent {
   searchQuery: string = '';
+  subject: string = '';
+  startTime: string = '';
+  endTime: string = '';
+  days: string = '';
+  daysMWF: boolean = false;
+  daysTR: boolean = false;
   @Input() searchResults: ClassComponent[] = [];
 
   @Output() addClassToSchedule = new EventEmitter<{day: string, classComponent: any}>();
 
   constructor(private http: HttpClient) {}
 
+  updateDaysFilter(): void {
+    const selectedDays = [];
+    if (this.daysMWF) selectedDays.push('MWF');
+    if (this.daysTR) selectedDays.push('TR');
+    this.days = selectedDays.join(','); // Combine selected days into a comma-separated string
+  }
+
   onSearch(): void {
     if (this.searchQuery.trim()) {
       // clear search results before fetching new classes
       this.searchResults = [];
+      // future url: `http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`
 
-      
       // `/api/search?query=${this.searchQuery}` replace this with actual API endpoint
       this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}`).subscribe(
         (results) => {
@@ -38,7 +51,7 @@ export class SearchComponent {
             classComponent.section = result.section;
             classComponent.semester = result.semester;
             classComponent.classId = result.id;
-            classComponent.classTimes = result.classTimes;
+            classComponent.classTimes = `${result.startTime} - ${result.endTime}`;
             classComponent.days = result.days;
             classComponent.isInSchedule = false;// Assuming classes are not in schedule initially
             this.searchResults.push(classComponent);
@@ -52,12 +65,20 @@ export class SearchComponent {
     }
   }
 
-handleAddClass(classItem: any): void {
-  const day = 'Monday'; // Replace with logic to determine the day
-  this.addClassToSchedule.emit({ day, classComponent: classItem });
-  // remove class from search results when added to schedule
-  this.searchResults = this.searchResults.filter(item => item.className !== classItem.className);
-}
+  handleAddClass(classItem: any): void {
+    const daysMapping: { [key: string]: string[] } = {
+      MWF: ['Monday', 'Wednesday', 'Friday'],
+      TR: ['Tuesday', 'Thursday']
+    };
+  
+    const classDays = daysMapping[classItem.days] || []; // Get the days based on the `days` property
+    classDays.forEach(day => {
+      this.addClassToSchedule.emit({ day, classComponent: classItem });
+    });
+  
+    // Remove the class from search results when added to the schedule
+    this.searchResults = this.searchResults.filter(item => item.className !== classItem.className);
+  }
 
 
 }
