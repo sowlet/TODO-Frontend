@@ -22,6 +22,12 @@ export class WeeklyScheduleViewComponent {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+
+  ngOnInit(): void {
+    // Initialize the schedule for each day if not already set
+    console.log('Initial schedule:', this.schedule);
+  }
+
   // method to remove a class from the schedule
   removeClassFromSchedule(classId: number): void {
     this.days.forEach(day => {
@@ -64,7 +70,7 @@ export class WeeklyScheduleViewComponent {
         console.log('Schedule saved successfully:', response);
       },
       error: (error) => {
-        console.error('Error saving schedule:', error);
+        console.error('Error saving schedule:', error.message);
       }
     });
   }
