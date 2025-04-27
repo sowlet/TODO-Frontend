@@ -1,39 +1,73 @@
 .weekly-schedule-view {
-    display: flex;
-    flex-direction: row; /* Arrange days horizontally */
-    justify-content: space-between; /* Add spacing between days */
-    background-color: #002b4f;
-    padding: 10px;
-    height: 100%; /* Ensure it spans the full height */
-    box-sizing: border-box; /* Include padding in height calculation */
-  }
-  
-  .day-column {
-    flex: 1; /* Each day takes equal space */
-    margin: 0 5px; /* Add spacing between columns */
-    background-color: #003b6f;
-    border-radius: 5px;
-    padding: 10px;
-    color: white;
-    display: flex;
-    flex-direction: column; /* Stack classes vertically */
-  }
-  
-  .day-label {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .class-card {
-    background-color: white;
-    color: black;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
+  display: flex;
+  flex-direction: row; /* Arrange days horizontally */
+  justify-content: space-between; /* Add spacing between days */
+  background-color: #002b4f;
+  padding: 10px;
+  height: 100%; /* Ensure it spans the full height */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
 
-  /* Buttons container */
+.day-column {
+  flex: 1; /* Each day takes equal space */
+  margin: 0 5px; /* Add spacing between columns */
+  background-color: #003b6f;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column; /* Stack classes vertically */
+  max-height: 90vh; /* Limit the height of each day column */
+  overflow-y: auto; /* Add scroll if content exceeds max height */
+}
+
+.day-label {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.class-card {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  padding: 3px; /* Reduce padding for smaller cards */
+  margin-bottom: 3px; /* Reduce spacing between cards */
+  flex-shrink: 0; /* Prevent cards from shrinking */
+  font-size: 9px; /* Reduce font size for smaller text */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  word-wrap: break-word; /* Ensure long text wraps within the card */
+  overflow: hidden; /* Prevent content from spilling out */
+  white-space: normal; /* Allow text to wrap to the next line */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  box-sizing: border-box; /* Include padding and border in width/height calculations */
+}
+
+/* Ensure the cards fit horizontally without cutting off */
+.class-card > * {
+  max-width: 100%; /* Prevent child elements from exceeding the card width */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  white-space: normal; /* Allow text to wrap */
+}
+
+/* Adjust the day-column to ensure proper spacing */
+.day-column {
+  flex: 1; /* Each day takes equal space */
+  margin: 0 5px; /* Add spacing between columns */
+  background-color: #003b6f;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column; /* Stack classes vertically */
+  max-height: 90vh; /* Limit the height of each day column */
+  overflow-y: auto; /* Add scroll if content exceeds max height */
+  box-sizing: border-box; /* Include padding and border in width/height calculations */
+}
+
+/* Buttons container */
 .schedule-buttons {
   display: flex;
   justify-content: space-between;

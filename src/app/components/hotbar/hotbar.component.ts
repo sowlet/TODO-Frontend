@@ -15,7 +15,7 @@ export class HotbarComponent {
   onLogoClick(){
     // load the schedule editor page: http://localhost:4200/schedule-editor
     console.log('Logo clicked');
-    this.router.navigate(['/schedule-editor']);
+    this.router.navigate(['/home']);
   }
 
 

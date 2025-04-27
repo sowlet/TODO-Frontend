@@ -1,4 +1,4 @@
-.about-header {
+.hotbar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,15 +7,16 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logo span {
+.logo {
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.5px;
   color: #ffffff;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
-.auth-buttons button {
+.profile-button button {
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: white;
@@ -27,62 +28,20 @@
   transition: all 0.3s ease;
 }
 
-.auth-buttons button:hover {
+.profile-button button:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-1px);
 }
 
-.about-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-  line-height: 1.6;
-}
-
-.about-content h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 1.5rem;
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-
-.about-content h2::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 60px;
-  height: 3px;
-  background: #001f3f;
-}
-
-.about-content p {
-  font-size: 1.1rem;
-  color: #444;
-  margin: 1.25rem 0;
-  max-width: 800px;
-}
-
-/* Add responsive design */
 @media (max-width: 768px) {
-  .about-header {
+  .hotbar-header {
       padding: 1rem;
       flex-direction: column;
       text-align: center;
   }
 
-  .auth-buttons {
+  .profile-button {
       margin-top: 1rem;
-  }
-
-  .auth-buttons button {
-      margin: 0.5rem;
-  }
-
-  .about-content {
-      padding: 2rem 1rem;
   }
 }

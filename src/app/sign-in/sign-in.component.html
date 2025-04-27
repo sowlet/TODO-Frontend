@@ -1,1 +1,50 @@
-<p>sign-in works!</p>
+<div class="signin-header">
+    <div class="logo" (click)="navigateToAbout()">COURSE SEARCH</div>
+  </div>
+  
+  <div class="signin-container">
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="onSignUp()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+      <!-- Add this right after your form -->
+      <div *ngIf="showError" class="error-popup">
+        <div class="error-content">
+          <p>{{errorMessage}}</p>
+          <button (click)="closeError()">Close</button>
+        </div>
+      </div>
+      <button type="submit" class="signup-button">Sign Up</button>
+    </form>
+    <p class="login-link">
+      Already a user? <span (click)="navigateToLogin()">LOGIN</span>
+    </p>
+  </div>

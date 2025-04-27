@@ -1,3 +1,56 @@
-<p>home works!</p>
-
-<app-hotbar></app-hotbar>
+<div class="home-container">
+  <div class="hotbar">
+    <app-hotbar-f></app-hotbar-f>
+  </div>
+  <div class="content-container">
+    <div class="left-panel">
+      <app-recommended-links></app-recommended-links>
+    </div>
+    <div class="main-content">
+      <div class="header-container">
+        <h1>Candidate Schedules</h1>
+        <div class="create-schedule-form">
+          <h2>Create New Schedule</h2>
+          <form (ngSubmit)="createCandidateSchedule()">
+            <input
+              type="text"
+              placeholder="Schedule Name"
+              [(ngModel)]="newSchedule.name"
+              name="name"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Semester"
+              [(ngModel)]="newSchedule.semester"
+              name="semester"
+              required
+            />
+            <button type="submit" class="create-button">Create Schedule</button>
+          </form>
+        </div>
+      </div>
+    
+      <div class="schedule-list">
+        <div class="schedule-item" *ngFor="let schedule of candidateSchedules">
+          <p class="schedule-name">{{ schedule.name }}</p>
+          <p class="schedule-semester">Semester: {{ schedule.semester }}</p>
+          <div class="button-container">
+            <button
+              (click)="navigateToSchedule(schedule)"
+              class="view-button"
+            >
+              View Schedule
+            </button>
+            <button
+              (click)="deleteCandidateSchedule(schedule.name)"
+              class="delete-button"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

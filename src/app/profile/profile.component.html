@@ -1,0 +1,23 @@
+<div class="profile-container">
+    <app-hotbar-f></app-hotbar-f>
+    <div class="profile-banner">
+        {{username}}'s PROFILE
+    </div>
+    <div class="profile-content">
+        <div class="profile-section-one">
+            <button (click)="navigateToProfile()">Account Details</button>
+            <button (click)="navigateToAbout()">Logout</button>
+        </div>
+        <div class="profile-section-two-three">
+            <div class="profile-details-form">
+                <label for="major">Major:</label>
+                <input type="text" id="major" name="major" [(ngModel)]="major">
+
+                <label for="minor">Minors:</label>
+                <input type="text" id="minor" name="minor" [(ngModel)]="minor">
+
+                <button (click)="saveChanges()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>

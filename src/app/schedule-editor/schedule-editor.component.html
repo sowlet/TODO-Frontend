@@ -1,19 +1,44 @@
 <div class="schedule-editor-container">
-    <!-- Hotbar at the top -->
-    <div class="hotbar-container">
-      <app-hotbar></app-hotbar>
+  <!-- Hotbar at the top -->
+  <div class="hotbar-container">
+    <app-hotbar-f></app-hotbar-f>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main-content">
+    <!-- Search component on the left -->
+    <div class="search-container">
+
+      <!-- Custom Event Form -->
+      <div class="custom-event-form">
+        <h3>Create Custom Event</h3>
+        <form (ngSubmit)="addCustomEvent()">
+          <label for="name">Event Name:</label>
+          <input id="name" type="text" [(ngModel)]="customEvent.name" name="name" required />
+
+          <label for="location">Location:</label>
+          <input id="location" type="text" [(ngModel)]="customEvent.location" name="location" required />
+
+          <label for="day">Day:</label>
+          <select id="day" [(ngModel)]="customEvent.day" name="day" required>
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+
+          <label for="startTime">Start Time:</label>
+          <input id="startTime" type="time" [(ngModel)]="customEvent.startTime" name="startTime" required />
+
+          <label for="endTime">End Time:</label>
+          <input id="endTime" type="time" [(ngModel)]="customEvent.endTime" name="endTime" required />
+
+          <button type="submit">Add Event</button>
+        </form>
+      </div>
+      <app-search (addClassToSchedule)="handleAddClass($event)"></app-search>
     </div>
-  
-    <!-- Main content area -->
-    <div class="main-content">
-      <!-- Search component on the left -->
-      <div class="search-container">
-        <app-search></app-search>
-      </div>
-  
-      <!-- Weekly schedule view on the right -->
-      <div class="schedule-container">
-        <app-weekly-schedule-view [schedule]="schedule"></app-weekly-schedule-view>
-      </div>
+
+    <!-- Weekly schedule view on the right -->
+    <div class="schedule-container">
+      <app-weekly-schedule-view [schedule]="schedule"></app-weekly-schedule-view>
     </div>
   </div>
+</div>

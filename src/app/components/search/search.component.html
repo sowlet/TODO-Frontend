@@ -1,27 +1,78 @@
 <div class="search-wrapper">
   <div class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search for class(es)"
+      class="search-input"
+      (keydown.enter)="onSearch()"
+    />
+    <div class="filters-container">
       <input
         type="text"
-        [(ngModel)]="searchQuery"
-        placeholder="Enter search query"
-        class="search-input"
+        [(ngModel)]="subject"
+        placeholder="Filter by subject"
+        class="filter-input"
+        (keydown.enter)="onSearch()"
       />
-      <button (click)="onSearch()" class="search-button">Search</button>
-    </div>
-    
-    <div class="results-container">
-      <!-- <div *ngFor="let result of searchResults" class="result-item"> -->
-        <!-- Placeholder for individual result components -->
-        <!-- {{ result.name }}-->
-      <!-- </div> --> 
-      <div *ngFor="let item of searchResults" class="result-card">
-        <div class="result-header">
-          <h3 class="result-title">{{ item }}</h3>
-          <span class="result-code">{{ item.code }}</span>
-          <button class="add-button">+</button>
-        </div>
-        <p class="result-description">{{ item.description }}</p>
-        <button class="play-button">▶</button>
+      <div class="time-filter">
+        <label for="startTime">Start Time:</label>
+        <input
+          id="startTime"
+          type="time"
+          [(ngModel)]="startTime"
+          class="filter-input"
+          (keydown.enter)="onSearch()"
+        />
       </div>
+      <div class="time-filter">
+        <label for="endTime">End Time:</label>
+        <input
+          id="endTime"
+          type="time"
+          [(ngModel)]="endTime"
+          class="filter-input"
+          (keydown.enter)="onSearch()"
+        />
+      </div>
+    </div>
+    <div class="days-filter">
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="daysMWF"
+          (change)="updateDaysFilter()"
+        />
+        MWF
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="daysTR"
+          (change)="updateDaysFilter()"
+        />
+        TR
+      </label>
+      <h1>    </h1>
+    </div>
+    <button (click)="onSearch()" class="search-button">Search</button>
+  </div>
+  
+  <div class="results-container">
+    <div *ngFor="let classItem of searchResults">
+      <app-class
+        [schedule]="classItem.schedule"
+        [className]="classItem.className"
+        [number]="classItem.number"
+        [subject]="classItem.subject"
+        [section]="classItem.section"
+        [semester]="classItem.semester"
+        [classId]="classItem.classId"
+        [classTimes]="classItem.classTimes"
+        [days]="classItem.days"
+        [isInSchedule]="false"
+        (addClass)="handleAddClass($event)"
+      ></app-class>
+    </div>
   </div>
 </div>

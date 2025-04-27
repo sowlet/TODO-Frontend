@@ -20,18 +20,62 @@
   }
   
   /* Search component on the left */
-  .search-container {
-    flex: 1;
-    background-color: #f0f4ff; /* Matches the search component background */
-    padding: 20px;
-    overflow-y: auto;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  /* Weekly schedule view on the right */
+/* Weekly schedule view on the right */
+/* Weekly schedule view on the right */
+.schedule-container {
+  flex: 4; /* Allocate more space to the schedule view */
+  background-color: #e6f0ff; /* Matches the schedule view background */
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-height: calc(100vh - 100px); /* Adjust height to fit within the viewport */
+}
+
+/* Search component on the left */
+.search-container {
+  flex: 1; /* Keep the search container smaller */
+  background-color: #f0f4ff; /* Matches the search component background */
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+  .custom-event-form {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  /* Weekly schedule view on the right */
-  .schedule-container {
-    flex: 2;
-    background-color: #e6f0ff; /* Matches the schedule view background */
-    padding: 20px;
-    overflow-y: auto;
+  .custom-event-form h3 {
+    margin-bottom: 10px;
+  }
+  
+  .custom-event-form label {
+    display: block;
+    margin: 8px 0 4px;
+    font-weight: bold;
+  }
+  
+  .custom-event-form input,
+  .custom-event-form select,
+  .custom-event-form button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .custom-event-form button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .custom-event-form button:hover {
+    background-color: #0056b3;
   }
