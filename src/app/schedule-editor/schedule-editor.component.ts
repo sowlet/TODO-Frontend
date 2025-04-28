@@ -31,6 +31,7 @@ export class ScheduleEditorComponent {
   @Input() scheduleName: string = '';
   @Input() classes: any[] = []
   @Input() customEvents: any[] = []
+  @Input() semester: string = ' ';
 
    // Form data for creating a custom event
    customEvent = {
@@ -42,9 +43,7 @@ export class ScheduleEditorComponent {
   };
 
   ngOnInit(): void {
-    console.log('Initial classes:', this.classes);
-    console.log('Initial custom events:', this.customEvents);
-    console.log('Initial scheduleName:', this.scheduleName);
+    console.log("Semester in schedule editor component: ", this.semester);
     this.loadSchedule();
   }
 
@@ -53,12 +52,14 @@ export class ScheduleEditorComponent {
     const state = navigation?.extras.state as { 
       scheduleName: string,
       classes: any[],
-      customEvents: any[] 
+      customEvents: any[],
+      semester: string
     };
   
     if (state) {
       console.log('Received state:', state); // Add this log
       this.scheduleName = state.scheduleName;
+      this.semester = state.semester;
       if (state.classes) {
         console.log('Raw classes:', state.classes); // Add this log
         this.classes = state.classes.map((classItem) => {
