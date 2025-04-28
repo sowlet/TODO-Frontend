@@ -29,7 +29,7 @@ export class ScheduleEditorComponent {
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
   @Input() scheduleName: string = '';
-  @Input() classes: ClassModel[] = []
+  @Input() classes: any[] = []
   @Input() customEvents: any[] = []
 
    // Form data for creating a custom event
@@ -41,19 +41,101 @@ export class ScheduleEditorComponent {
     endTime: '',
   };
 
+  ngOnInit(): void {
+    console.log('Initial classes:', this.classes);
+    console.log('Initial custom events:', this.customEvents);
+    console.log('Initial scheduleName:', this.scheduleName);
+    this.loadSchedule();
+  }
+
   constructor(private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { classes: any[] };
-
-    if (state?.classes) {
-      // Map the raw classes into ClassModel instances
-      this.classes = state.classes.map((classItem) => new ClassModel(classItem));
+    const state = navigation?.extras.state as { 
+      scheduleName: string,
+      classes: any[],
+      customEvents: any[] 
+    };
+  
+    if (state) {
+      console.log('Received state:', state); // Add this log
+      this.scheduleName = state.scheduleName;
+      if (state.classes) {
+        console.log('Raw classes:', state.classes); // Add this log
+        this.classes = state.classes.map((classItem) => {
+          console.log('Mapping class item:', classItem); // Add this log
+          return new ClassModel(classItem);
+        });
+        console.log('Mapped classes:', this.classes); // Add this log
+      }
+      if (state.customEvents) {
+        this.customEvents = state.customEvents;
+      }
     }
   }
 
   // method to handle loadding classes and custom events into the schedule
   loadSchedule(): void {
-    // classModel.classDays will be a string like "MWF" or "TR"
+    // Reset schedule
+    this.schedule = {};
+    
+    // Initialize empty arrays for each day
+    this.days.forEach(day => {
+      this.schedule[day] = [];
+    });
+  
+    // Use the same day mapping as search component
+    const dayMap: { [key: string]: string } = {
+      'M': 'Monday',
+      'T': 'Tuesday',
+      'W': 'Wednesday',
+      'R': 'Thursday',
+      'F': 'Friday'
+    };
+  
+    // Process each class
+    this.classes.forEach(classItem => {
+      const days = classItem.days.split('');
+      const uniqueDays = new Set<string>();
+  
+      // Convert each letter to its corresponding day name
+      days.forEach((letter: string) => {
+        if (dayMap[letter]) {
+          uniqueDays.add(dayMap[letter]);
+        }
+      });
+  
+      // Add class to each day in the schedule
+      uniqueDays.forEach(day => {
+        const [startTime, endTime] = classItem.classTimes.split(' - ');
+        
+        // Create schedule entry
+        const scheduleEntry = {
+          ...classItem,
+          startTime,
+          endTime,
+          isInSchedule: true
+        };
+  
+        // Add to schedule
+        if (!this.schedule[day]) {
+          this.schedule[day] = [];
+        }
+        this.schedule[day].push(scheduleEntry);
+      });
+    });
+  
+    // Process custom events if any
+    this.customEvents?.forEach(event => {
+      if (!this.schedule[event.day]) {
+        this.schedule[event.day] = [];
+      }
+      this.schedule[event.day].push({
+        ...event,
+        isInSchedule: true
+      });
+    });
+  
+    console.log('Schedule loaded:', this.schedule);
   }
 
   // method to handle adding class from search results to the weekly schedule view component

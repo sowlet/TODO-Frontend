@@ -44,7 +44,7 @@ export class SearchComponent {
       // future url: `http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`
 
       // `/api/search?query=${this.searchQuery}` replace this with actual API endpoint
-      this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}`).subscribe(
+      this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`).subscribe(
         (results) => {
           console.log('Search results received:', results);
           for (const result of results) {
@@ -70,16 +70,27 @@ export class SearchComponent {
   }
 
   handleAddClass(classItem: any): void {
-    const daysMapping: { [key: string]: string[] } = {
-      MWF: ['Monday', 'Wednesday', 'Friday'],
-      TR: ['Tuesday', 'Thursday']
+    const dayMap: { [key: string]: string } = {
+      'M': 'Monday',
+      'T': 'Tuesday',
+      'W': 'Wednesday',
+      'R': 'Thursday',
+      'F': 'Friday'
     };
   
-    const classDays = daysMapping[classItem.days] || [];
     let conflictFound = false;
+    const days = classItem.days.split('');
+    const uniqueDays = new Set<string>();
+  
+    // Convert each letter to its corresponding day name
+    days.forEach((letter: string) => {
+      if (dayMap[letter]) {
+      uniqueDays.add(dayMap[letter]);
+      }
+    });
   
     // Add class to each day in the schedule
-    classDays.forEach(day => {
+    uniqueDays.forEach(day => {
       this.addClassToSchedule.emit({ 
         day, 
         classComponent: classItem,

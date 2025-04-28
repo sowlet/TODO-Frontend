@@ -34,14 +34,28 @@ export class HomeComponent {
 
   // Method to navigate to the candidate schedule page
   navigateToSchedule(schedule: any) {
+    console.log('Navigating to schedule:', schedule);
     this.router.navigate(['/schedule-editor', schedule.name], {
-      state: { scheduleName: schedule.name, classes: schedule.classes, customEvents: schedule.customEvents }
+      state: { scheduleName: schedule.name, 
+        classes: schedule.classes.map((classItem: any) => ({
+          className: classItem.name,
+          number: classItem.number,
+          subject: classItem.subject,
+          section: classItem.section,
+          semester: classItem.semester,
+          classId: classItem.id,
+          classTimes: `${classItem.startTime} - ${classItem.endTime}`,
+          days: classItem.days,
+          isInSchedule: true
+        })),
+        customEvents: schedule.customEvents || [] }
     });
   }
 
 
   getCandidateSchedules() {
-    // add logic to fetch candidate schedules from the backend
+    // add logic to fetch candidate schedules from the backend...
+    // format looks like this: {name: 'Schedule 1', classes: [], customEvents: []}
     const url = `http://localhost:7070/schedule?username=${this.username}`; // API endpoint
 
   this.http.get<any[]>(url).subscribe({
@@ -80,6 +94,7 @@ export class HomeComponent {
         };
 
         this.candidateSchedules.push(newSchedule); // Add the new schedule to the list
+        this.getCandidateSchedules(); // Refresh the list of candidate schedules
         this.newSchedule = { name: '', semester: '', schedule: [] }; // Reset the form
       },
       error: (error) => {
