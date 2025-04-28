@@ -6,6 +6,7 @@ import { ClassModel } from '../../models/class.model'; // Assuming you have a Cl
 import { CustomEventComponent } from '../custom-event/custom-event.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../account.service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [CommonModule, FormsModule, ClassComponent, CustomEventComponent],
@@ -20,7 +21,7 @@ export class WeeklyScheduleViewComponent {
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   username: string = '';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
 
 
   ngOnInit(): void {
@@ -68,6 +69,7 @@ export class WeeklyScheduleViewComponent {
     ).subscribe({
       next: (response) => {
         console.log('Schedule saved successfully:', response);
+        this.router.navigate(['/home']); // Navigate to home after saving
       },
       error: (error) => {
         console.error('Error saving schedule:', error.message);

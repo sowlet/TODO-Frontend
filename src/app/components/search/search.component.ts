@@ -70,16 +70,27 @@ export class SearchComponent {
   }
 
   handleAddClass(classItem: any): void {
-    const daysMapping: { [key: string]: string[] } = {
-      MWF: ['Monday', 'Wednesday', 'Friday'],
-      TR: ['Tuesday', 'Thursday']
+    const dayMap: { [key: string]: string } = {
+      'M': 'Monday',
+      'T': 'Tuesday',
+      'W': 'Wednesday',
+      'R': 'Thursday',
+      'F': 'Friday'
     };
   
-    const classDays = daysMapping[classItem.days] || [];
     let conflictFound = false;
+    const days = classItem.days.split('');
+    const uniqueDays = new Set<string>();
+  
+    // Convert each letter to its corresponding day name
+    days.forEach((letter: string) => {
+      if (dayMap[letter]) {
+      uniqueDays.add(dayMap[letter]);
+      }
+    });
   
     // Add class to each day in the schedule
-    classDays.forEach(day => {
+    uniqueDays.forEach(day => {
       this.addClassToSchedule.emit({ 
         day, 
         classComponent: classItem,
