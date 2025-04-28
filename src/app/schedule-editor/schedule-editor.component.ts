@@ -203,7 +203,7 @@ export class ScheduleEditorComponent {
 
     this.schedule[event.day].push(event);
 
-    this.http.post(`http://localhost:7070/schedule?username=${this.username}&account=${this.scheduleName}&eventName=${event.name}&eventLocation=${event.location}&eventDay=${event.day}&startTime=${event.startTime}&endTime=${event.endTime}`,
+    this.http.post(`http://localhost:7070/schedule-editor?username=${this.username}&account=${this.scheduleName}&eventName=${event.name}&eventLocation=${event.location}&eventDay=${event.day}&startTime=${event.startTime}&endTime=${event.endTime}`,
       {}
     ).subscribe({
       next: (response: any) => {
