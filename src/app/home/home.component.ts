@@ -94,6 +94,7 @@ export class HomeComponent {
         };
 
         this.candidateSchedules.push(newSchedule); // Add the new schedule to the list
+        this.getCandidateSchedules(); // Refresh the list of candidate schedules
         this.newSchedule = { name: '', semester: '', schedule: [] }; // Reset the form
       },
       error: (error) => {

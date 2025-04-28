@@ -83,18 +83,29 @@ export class ScheduleEditorComponent {
       this.schedule[day] = [];
     });
   
+    // Use the same day mapping as search component
+    const dayMap: { [key: string]: string } = {
+      'M': 'Monday',
+      'T': 'Tuesday',
+      'W': 'Wednesday',
+      'R': 'Thursday',
+      'F': 'Friday'
+    };
+  
     // Process each class
     this.classes.forEach(classItem => {
-      const daysMapping: { [key: string]: string[] } = {
-        'MWF': ['Monday', 'Wednesday', 'Friday'],
-        'TR': ['Tuesday', 'Thursday']
-      };
+      const days = classItem.days.split('');
+      const uniqueDays = new Set<string>();
   
-      // Get the days this class occurs on
-      const classDays = daysMapping[classItem.days] || [];
+      // Convert each letter to its corresponding day name
+      days.forEach((letter: string) => {
+        if (dayMap[letter]) {
+          uniqueDays.add(dayMap[letter]);
+        }
+      });
   
       // Add class to each day in the schedule
-      classDays.forEach(day => {
+      uniqueDays.forEach(day => {
         const [startTime, endTime] = classItem.classTimes.split(' - ');
         
         // Create schedule entry
@@ -106,6 +117,9 @@ export class ScheduleEditorComponent {
         };
   
         // Add to schedule
+        if (!this.schedule[day]) {
+          this.schedule[day] = [];
+        }
         this.schedule[day].push(scheduleEntry);
       });
     });

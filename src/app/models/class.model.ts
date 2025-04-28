@@ -1,7 +1,5 @@
 export class ClassModel {
   className: string;
-  courseCode: string;
-  courseDescription: string;
   number: number;
   subject: string;
   section: string;
@@ -13,8 +11,6 @@ export class ClassModel {
 
   constructor(data: any) {
     this.className = data.className || '';
-    this.courseCode = data.courseCode || '';
-    this.courseDescription = data.courseDescription || '';
     this.number = data.number || 0;
     this.subject = data.subject || '';
     this.section = data.section || '';
