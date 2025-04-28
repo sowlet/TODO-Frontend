@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../account.service';
 
 @Component({
   selector: 'app-schedule-editor',
@@ -31,6 +33,7 @@ export class ScheduleEditorComponent {
   @Input() scheduleName: string = '';
   @Input() classes: any[] = []
   @Input() customEvents: any[] = []
+  @Input() username: string = '';
 
    // Form data for creating a custom event
    customEvent = {
@@ -39,16 +42,19 @@ export class ScheduleEditorComponent {
     day: 'Monday',
     startTime: '',
     endTime: '',
+    id: ''
   };
+  
 
   ngOnInit(): void {
     console.log('Initial classes:', this.classes);
     console.log('Initial custom events:', this.customEvents);
     console.log('Initial scheduleName:', this.scheduleName);
+    this.username = this.authService.getUsername();
     this.loadSchedule();
   }
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private authService: AuthService) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { 
       scheduleName: string,
@@ -195,6 +201,24 @@ export class ScheduleEditorComponent {
     }
 
     this.schedule[event.day].push(event);
+
+    this.http.post(`http://localhost:7070/schedule?username=${this.username}&account=${this.scheduleName}&eventName=${event.name}&eventLocation=${event.location}&eventDay=${event.day}&startTime=${event.startTime}&endTime=${event.endTime}`,
+      {}
+    ).subscribe({
+      next: (response: any) => {
+        if (response && response.id) {
+          this.customEvent.id = response.id; // Assign the ID from the response
+          console.log('Custom event saved successfully with ID:', response.id);
+        } else {
+          console.error('Response does not contain an ID:', response);
+        }
+      },
+      error: (error) => {
+        console.error('Error saving schedule:', error.message);
+      }
+    });
+  
+
     console.log(`Custom event ${event.name} added to ${event.day}`);
     console.log('Current schedule:', this.schedule);
 
@@ -205,6 +229,7 @@ export class ScheduleEditorComponent {
       day: 'Monday',
       startTime: '',
       endTime: '',
+      id: ''
     };
   }
 
