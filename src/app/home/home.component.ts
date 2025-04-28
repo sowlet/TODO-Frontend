@@ -19,6 +19,7 @@ import { AuthService } from '../account.service';
 export class HomeComponent {
   username: string = '';
   candidateSchedules: any[] = []
+  semesters: string[] = ['2023_Fall', '2024_Spring', '2024_Fall', '2025_Spring'];
   newSchedule = { name: '', semester: '', schedule: [] };
 
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) {{
@@ -36,7 +37,7 @@ export class HomeComponent {
   navigateToSchedule(schedule: any) {
     console.log('Navigating to schedule:', schedule);
     this.router.navigate(['/schedule-editor', schedule.name], {
-      state: { scheduleName: schedule.name, 
+      state: { scheduleName: schedule.name, semester: schedule.semester,
         classes: schedule.classes.map((classItem: any) => ({
           className: classItem.name,
           number: classItem.number,
@@ -78,7 +79,7 @@ export class HomeComponent {
       schedule: [], // Empty schedule for now
     };
 
-    const url = `http://localhost:7070/schedule?username=${this.username}&name=${newSchedule.name}`;
+    const url = `http://localhost:7070/schedule?username=${this.username}&name=${newSchedule.name}&semester=${newSchedule.semester}`;
 
     this.http.post(url, {}).subscribe({
       next: (response: any) => {

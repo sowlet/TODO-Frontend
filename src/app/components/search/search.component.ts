@@ -21,12 +21,17 @@ export class SearchComponent {
   daysMWF: boolean = false;
   daysTR: boolean = false;
   @Input() searchResults: ClassComponent[] = [];
+  @Input() semester: string = ' ';
 
   @Output() addClassToSchedule = new EventEmitter<{
     day: string, 
     classComponent: any, 
     onConflict: () => void
   }>();
+
+  ngOnInit(): void {
+    console.log('Semester in search component: ', this.semester);
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -44,7 +49,7 @@ export class SearchComponent {
       // future url: `http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`
 
       // `/api/search?query=${this.searchQuery}` replace this with actual API endpoint
-      this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`).subscribe(
+      this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}&semester=${this.semester}`).subscribe(
         (results) => {
           console.log('Search results received:', results);
           for (const result of results) {
