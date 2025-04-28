@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ClassComponent } from '../class/class.component';
 import { ClassModel } from '../../models/class.model'; // Assuming you have a ClassModel defined in models folder
 import { CustomEventComponent } from '../custom-event/custom-event.component';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../account.service';
 
 @Component({
   imports: [CommonModule, FormsModule, ClassComponent, CustomEventComponent],
@@ -13,8 +15,18 @@ import { CustomEventComponent } from '../custom-event/custom-event.component';
 })
 export class WeeklyScheduleViewComponent {
   @Input() schedule: { [key: string]: any[] } = {};
+  @Input() scheduleName: string = '';
   @Input() showButtons: boolean = true;
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  username: string = '';
+
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+
+  ngOnInit(): void {
+    // Initialize the schedule for each day if not already set
+    console.log('Initial schedule:', this.schedule);
+  }
 
   // method to remove a class from the schedule
   removeClassFromSchedule(classId: number): void {
@@ -30,9 +42,39 @@ export class WeeklyScheduleViewComponent {
 
   // method to save the current schedule to the backend
   saveSchedule() {
-    console.log('Schedule saved:', this.schedule);
-    // Add logic to save the schedule to the backend here
+    // Extract all unique class IDs from the schedule
+    const classIds = new Set<number>();
+    this.days.forEach(day => {
+      if (this.schedule[day]) {
+        this.schedule[day].forEach((item: any) => {
+          if (item.classId) {
+            classIds.add(item.classId);
+          }
+        });
+      }
+    });
+
+    // Convert Set to array
+    const classIdsArray = Array.from(classIds);
+
+    this.username = this.authService.getUsername();
+
+    console.log(classIdsArray);
+    console.log(`Saving schedule for user: ${this.username} with name: ${this.scheduleName}`);
+
+    // Make the PUT request
+    this.http.put(`http://localhost:7070/schedule?username=${this.username}&name=${this.scheduleName}`,
+      { classes: classIdsArray }
+    ).subscribe({
+      next: (response) => {
+        console.log('Schedule saved successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error saving schedule:', error.message);
+      }
+    });
   }
+      
 
   // method to delete the current schedule/wipe all of the classes
   deleteSchedule() {
@@ -51,4 +93,4 @@ removeEventFromSchedule(day: string, eventItem: any): void {
   console.log(`Custom event ${eventItem.name} removed from ${day}`);
   console.log('Current schedule:', this.schedule);
 }
-}
+} 

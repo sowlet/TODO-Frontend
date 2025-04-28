@@ -44,7 +44,7 @@ export class SearchComponent {
       // future url: `http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`
 
       // `/api/search?query=${this.searchQuery}` replace this with actual API endpoint
-      this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}`).subscribe(
+      this.http.get<any[]>(`http://localhost:7070/search?query=${this.searchQuery}&subject=${this.subject}&startTime=${this.startTime}&endTime=${this.endTime}&days=${this.days}`).subscribe(
         (results) => {
           console.log('Search results received:', results);
           for (const result of results) {
