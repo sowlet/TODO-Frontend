@@ -19,14 +19,12 @@
               name="name"
               required
             />
-            <input
-              type="text"
-              placeholder="Semester"
-              [(ngModel)]="newSchedule.semester"
-              name="semester"
-              required
-            />
+            <select [(ngModel)]="newSchedule.semester" name="semester">
+              <option *ngFor="let sem of semesters" [value]="sem">{{sem}}</option>
+            </select>
+            <div class="button-spacing">
             <button type="submit" class="create-button">Create Schedule</button>
+            </div>
           </form>
         </div>
       </div>
