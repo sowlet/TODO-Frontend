@@ -191,6 +191,24 @@ export class ScheduleEditorComponent {
       return; // Prevent adding the event
     }
 
+    if (!event.day.trim()) {
+      console.error('Day cannot be empty.');
+      alert('Please provide a valid day name.');
+      return; // Prevent adding the event
+    }
+
+    if (!event.startTime.trim()) {
+      console.error('Start time cannot be empty.');
+      alert('Please provide a valid time.');
+      return; // Prevent adding the event
+    }
+
+    if (!event.endTime.trim()) {
+      console.error('End time cannot be empty.');
+      alert('Please provide a valid time.');
+      return; // Prevent adding the event
+    }
+
     if (this.checkTimeConflict(event.day, event.startTime, event.endTime)) {
       console.error(`Time conflict detected for event "${event.name}" on ${event.day} from ${event.startTime} to ${event.endTime}.`);
       alert(`Time conflict detected! Event "${event.name}" cannot be added.`);
@@ -203,11 +221,11 @@ export class ScheduleEditorComponent {
 
     this.schedule[event.day].push(event);
 
-    this.http.post(`http://localhost:7070/schedule-editor?username=${this.username}&account=${this.scheduleName}&eventName=${event.name}&eventLocation=${event.location}&eventDay=${event.day}&startTime=${event.startTime}&endTime=${event.endTime}`,
-      {}
-    ).subscribe({
+    const url = `http://localhost:7070/schedule-ce?username=${this.username}&account=${this.scheduleName}&eventName=${event.name}&eventLocation=${event.location}&eventDay=${event.day}&startTime=${event.startTime}&endTime=${event.endTime}`
+
+    this.http.post(url, {}).subscribe({
       next: (response: any) => {
-        if (response && response.id) {
+        if (response.id) {
           this.customEvent.id = response.id; // Assign the ID from the response
           console.log('Custom event saved successfully with ID:', response.id);
         } else {
